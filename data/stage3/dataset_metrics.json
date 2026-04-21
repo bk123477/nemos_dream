@@ -1,85 +1,87 @@
 {
   "counts": {
-    "accepted": 1,
-    "rejected": 10,
-    "total": 11
+    "accepted": 0,
+    "rejected": 51,
+    "total": 51
   },
-  "reward_distribution": {
-    "coherence": {
-      "mean": 0.785,
-      "p50": 0.785,
-      "p95": 0.785,
-      "n": 1
-    },
-    "correctness": {
-      "mean": 0.813,
-      "p50": 0.813,
-      "p95": 0.813,
-      "n": 1
-    }
-  },
+  "reward_distribution": {},
   "embedding_diversity": {
     "mean_pairwise_distance": 0.0,
     "source": "insufficient"
   },
   "distinct_n": {
-    "1": 0.5974,
-    "2": 0.6579,
-    "3": 0.72
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0
   },
-  "persona_coverage_entropy": {
-    "gender": 1.0,
-    "age": 1.0,
-    "occupation": 1.0,
-    "education": 0.0,
-    "marital_status": 0.0,
-    "military_status": 0.0,
-    "family_type": 0.0,
-    "housing": 0.0,
-    "major": 0.0
-  },
-  "scene_coverage_entropy": {
-    "setting": 0.0,
+  "decomposed_coverage_entropy": {
+    "overall_register": 0.0,
+    "overall_emotion": 0.0,
+    "speech_acts": 0.0,
+    "scene_setting": 0.0,
     "relationship_type": 0.0,
-    "topics": 1.585
+    "speaker_age_group": 0.0,
+    "speaker_register": 0.0
   },
   "cultural_ref_diversity": {
-    "total_refs": 2,
-    "distinct_terms": 2,
-    "diversity_ratio": 1.0,
-    "type_entropy": 1.0
+    "total_refs": 0,
+    "distinct_terms": 0,
+    "diversity_ratio": 0.0,
+    "type_entropy": 0.0
+  },
+  "mapped_ref_stats": {
+    "total_mapped": 0,
+    "distinct_ko": 0,
+    "retrieved_share": 0.0,
+    "by_source": {},
+    "by_type": {}
   },
   "length_stats": {
-    "turns": {
-      "mean": 6.0,
-      "p50": 6.0,
-      "p95": 6.0,
-      "n": 1
-    },
     "chars": {
-      "mean": 305.0,
-      "p50": 305.0,
-      "p95": 305.0,
-      "n": 1
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "n": 0
+    },
+    "tokens": {
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "n": 0
+    },
+    "turns": {
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "n": 0
+    },
+    "mapped_refs": {
+      "mean": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "n": 0
     }
   },
   "reject_breakdown": {
-    "stage3.phase1:near_dup": 2,
+    "stage3.phase1:exact_dup": 1,
     "stage3.phase2:ascii_ratio": 1,
+    "stage3.phase2:cultural_ref_coverage": 3,
     "stage3.phase2:turn_count_parity": 1,
-    "stage3.phase4:intra_kr_coherence": 6
+    "stage3.phase3:safety": 1,
+    "stage3.phase5:axis_floor": 44
   },
   "retry_stats": {
     "iter_histogram": {
-      "0": 11
+      "0": 51
     },
     "action_counts": {
-      "none": 3,
+      "maps_ref_redo": 28,
+      "none": 1,
       "stage1_redecompose": 1,
-      "stage2_rewrite": 6
+      "stage2_rewrite": 50,
+      "websearch_cultural": 28
     },
     "valid_after_retry_rate": 0.0,
     "retried_rows": 0
-  },
-  "schema_parse_errors": 0
+  }
 }
