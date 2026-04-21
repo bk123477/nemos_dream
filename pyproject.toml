@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "EN→KR cultural SDG pipeline for NVIDIA Nemotron Hackathon Track C."
 requires-python = ">=3.11"
 authors = [
-    { name = "SKT / nemos_dream team" },
+    { name = "nemos_dream team" },
 ]
 readme = "README.md"
 
@@ -24,6 +24,7 @@ dependencies = [
     "nemo-curator>=1.1.0",                 # Curator pipeline + dedup (stage 3)
     "langchain-nvidia-ai-endpoints>=0.3",  # LangChain ↔ NVIDIA NIM
     "datasets",                            # HF — `nvidia/Nemotron-Personas-Korea` (stage 2)
+    "tavily-python",                       # web fallback for stage 1 cultural_map (dict→retriever→web+llm)
 ]
 
 [dependency-groups]

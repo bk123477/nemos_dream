@@ -1,10 +1,811 @@
 {
   "_comment": "Seed EN→KR cultural map. Stage 1 self-grows this with web+llm retrievals when persist=true.",
-  "thanksgiving": {"ko": "추석", "type": "holiday", "notes": "가족 모임 맥락"},
-  "venmo": {"ko": "토스", "type": "service", "notes": ""},
-  "prom": {"ko": "졸업식 뒤풀이", "type": "event", "approximate": true, "notes": ""},
-  "starbucks": {"ko": "스타벅스", "type": "brand", "keep": true, "notes": ""},
-  "pumpkin spice latte": {"ko": "고구마 라떼", "type": "food", "notes": "seasonal fall drink trope"},
-  "google": {"ko": "네이버", "type": "brand", "notes": "dominant search brand in KR"},
-  "spring break": {"ko": "개강 전 여행", "type": "event", "notes": ""}
+  "4th of july": {
+    "ko": "광복절",
+    "type": "holiday",
+    "notes": "대한민국이 일본의 식민지_rule을 해방한 날을 기념하는 광복절",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "airport": {
+    "ko": "공항",
+    "type": "service",
+    "notes": "The everyday Korean word for airport, used naturally in conversation.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "amazon": {
+    "ko": "쿠팡",
+    "type": "brand",
+    "notes": ""
+  },
+  "atm": {
+    "ko": "에이티엠",
+    "type": "service",
+    "notes": "Koreans commonly refer to ATMs as 에이티엠.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "bakery": {
+    "ko": "떡집",
+    "type": "food",
+    "notes": "A family‑run rice‑cake shop, often a retirement business",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "bank": {
+    "ko": "카카오뱅크",
+    "type": "service",
+    "notes": "Koreans commonly use the digital bank KakaoBank for everyday banking needs.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "basketball": {
+    "ko": "축구",
+    "type": "other",
+    "notes": "Korean speakers would refer to soccer as the comparable school sport",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "big ben": {
+    "ko": "N서울타워",
+    "type": "other",
+    "notes": "Iconic Seoul tower often cited as a must‑see landmark",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "bipolar disorder": {
+    "ko": "조울증",
+    "type": "other",
+    "notes": "Commonly used Korean term for bipolar disorder in everyday discussion",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "birthday": {
+    "ko": "생일",
+    "type": "event",
+    "notes": "생일은 일반적으로 축하하는 생일 행사를 의미합니다.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "british museum": {
+    "ko": "국립중앙박물관",
+    "type": "other",
+    "notes": "Korea's main national museum, analogous to the British Museum",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "buckingham palace": {
+    "ko": "경복궁",
+    "type": "other",
+    "notes": "Korean royal palace that serves as a major tourist landmark",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "building": {
+    "ko": "건물",
+    "type": "other",
+    "notes": "일상 대화에서 가장 자연스럽게 쓰는 단어",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "burgers": {
+    "ko": "버거",
+    "type": "food",
+    "notes": "버거는 빵 사이에 고기 패티가 들어간 음식입니다.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "burrito": {
+    "ko": "김밥",
+    "type": "food",
+    "notes": "김밥은 밥과 반찬을 말아 만든 한국식 랩입니다.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "bus": {
+    "ko": "버스",
+    "type": "other",
+    "notes": "Koreans simply call city buses 버스.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "caramel macchiato": {
+    "ko": "카라멜 마키아토",
+    "type": "food",
+    "notes": "에스프레소 위에 스팀밀크와 카라멜 소스를 얹은 음료",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "cat": {
+    "ko": "고양이",
+    "type": "other",
+    "notes": "Common Korean word for cat",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "christianity": {
+    "ko": "기독교",
+    "type": "other",
+    "notes": "Standard Korean term for Christianity used in religious discussions.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "christmas": {
+    "ko": "크리스마스",
+    "type": "holiday",
+    "notes": "romantic/couples event in Korea, not family-centric"
+  },
+  "church": {
+    "ko": "교회",
+    "type": "service",
+    "notes": "종교 예배가 열리는 공동체 공간",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "clown": {
+    "ko": "코미디언",
+    "type": "pop_culture",
+    "notes": "Korean comedic performer analogous to a clown",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "coach": {
+    "ko": "코치",
+    "type": "service",
+    "notes": "Korean term for a sports team coach",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "cold open": {
+    "ko": "프리미어",
+    "type": "event",
+    "notes": "새로운 프로그램의 첫 공개 행사",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "college": {
+    "ko": "수능",
+    "type": "event",
+    "notes": "수능은 대학 진학을 결정하는 국가 시험으로, 대학과 같은 진로 결정 단계와 유사하다.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "converse": {
+    "ko": "슈펭",
+    "type": "brand",
+    "notes": "Korea's cheaper Converse alternative, widely worn as casual sneakers.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "counseling": {
+    "ko": "마음",
+    "type": "service",
+    "notes": "Korea's popular mental‑health counseling app",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "customer service": {
+    "ko": "고객센터",
+    "type": "service",
+    "notes": "일상 대화에서 고객을 도우미 역할을 하는 부서를 의미한다",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "dance": {
+    "ko": "댄스",
+    "type": "other",
+    "notes": "Koreans commonly use the loanword '댄스' to refer to a dance performance or routine.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "dance routine": {
+    "ko": "안무",
+    "type": "pop_culture",
+    "notes": "Korean term for a choreographed dance performance, commonly used in K‑pop and variety shows.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "dishwashing": {
+    "ko": "설거지",
+    "type": "other",
+    "notes": "Common term for washing dishes in Korean households",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "doctor": {
+    "ko": "의사",
+    "type": "service",
+    "notes": "Koreans refer to a medical doctor as 의사.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "doordash": {
+    "ko": "배달의민족",
+    "type": "brand",
+    "notes": ""
+  },
+  "dorm move-in": {
+    "ko": "기숙사 입주",
+    "type": "event",
+    "notes": "대학생이 기숙사에 입주하는 행사",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "dude": {
+    "ko": "형",
+    "type": "slang",
+    "notes": "Informal male address equivalent to 'dude'",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "fam": {
+    "ko": "형",
+    "type": "slang",
+    "notes": "Used like 'bro' for close male friends, similar to 'fam' in English.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "fourth of july": {
+    "ko": "광복절",
+    "type": "holiday",
+    "notes": "national holiday analogue",
+    "approximate": true
+  },
+  "frat party": {
+    "ko": "동아리 뒤풀이",
+    "type": "event",
+    "notes": "",
+    "approximate": true
+  },
+  "friendly competition": {
+    "ko": "친선 경기",
+    "type": "event",
+    "notes": "Friendly matches are called 친선 경기 in Korean.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "game": {
+    "ko": "농구 결승",
+    "type": "event",
+    "notes": "Korea's championship basketball final, a major spectator event akin to a game.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "god": {
+    "ko": "신",
+    "type": "other",
+    "notes": "신은 일반적인 신성 존재를 일컫는 말입니다.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "google": {
+    "ko": "네이버",
+    "type": "brand",
+    "notes": "dominant search brand in KR"
+  },
+  "graduation": {
+    "ko": "졸업식",
+    "type": "event",
+    "notes": "Korean graduation ceremony",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "halloween": {
+    "ko": "핼러윈",
+    "type": "holiday",
+    "notes": "young-adult costume parties in urban areas"
+  },
+  "high school": {
+    "ko": "고등학교",
+    "type": "other",
+    "notes": "Korean term for high school, covering grades 10‑12",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "homecoming": {
+    "ko": "학교 축제",
+    "type": "event",
+    "notes": "",
+    "approximate": true
+  },
+  "imessage": {
+    "ko": "카카오톡",
+    "type": "brand",
+    "notes": ""
+  },
+  "iphone": {
+    "ko": "갤럭시",
+    "type": "brand",
+    "notes": "Samsung의 플래그십 스마트폰 브랜드로, 아이폰과 같은 위상을 갖는다.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "jeans": {
+    "ko": "청바지",
+    "type": "other",
+    "notes": "Korean term for jeans, the usual word used when talking about pants.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "jesus": {
+    "ko": "예수님",
+    "type": "other",
+    "notes": "Korean Christians refer to Jesus as 예수님, the standard term used in religious contexts.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "jesus christ": {
+    "ko": "예수 그리스도",
+    "type": "pop_culture",
+    "notes": "Koreans typically call him 예수 그리스도 in religious contexts.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "jfk": {
+    "ko": "인천공항",
+    "type": "other",
+    "notes": "대한민국을 대표하는 국제공항",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "kindergarten": {
+    "ko": "유치원",
+    "type": "event",
+    "notes": "Korean term for the early‑childhood education institution",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "london": {
+    "ko": "서울",
+    "type": "other",
+    "notes": "서울 is the capital city Koreans commonly reference as a travel destination.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "london heathrow": {
+    "ko": "인천공항",
+    "type": "other",
+    "notes": "Koreans commonly refer to Incheon International Airport as the primary international gateway.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "lottery": {
+    "ko": "로또",
+    "type": "event",
+    "notes": "the most familiar national lottery game",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "lyft": {
+    "ko": "타다",
+    "type": "brand",
+    "notes": ""
+  },
+  "man": {
+    "ko": "오빠",
+    "type": "slang",
+    "notes": "Used by females to address an older male friend informally.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "marketing": {
+    "ko": "마케팅",
+    "type": "other",
+    "notes": "Commonly used in Korean business to denote product promotion and sales strategy.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "measles": {
+    "ko": "홍역",
+    "type": "other",
+    "notes": "Common Korean term for measles used in everyday discussion.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "motorcycle": {
+    "ko": "자동차",
+    "type": "other",
+    "notes": "Cars are the typical Korean equivalent when discussing giving away a personal vehicle and its upkeep costs.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "national gallery": {
+    "ko": "국립미술관",
+    "type": "other",
+    "notes": "Korean term for a national art museum/gallery",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "netflix": {
+    "ko": "넷플릭스",
+    "type": "service",
+    "notes": "한국에서 스트리밍 서비스를 통틀어 통용되는 이름",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "new year's eve": {
+    "ko": "새해맞이",
+    "type": "holiday",
+    "notes": "해돋이 문화 포함"
+  },
+  "outdoors": {
+    "ko": "자연",
+    "type": "other",
+    "notes": "Koreans use '자연' to denote the natural environment enjoyed in hiking, camping, and feeling connected to nature.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "peanut butter sandwich": {
+    "ko": "김밥",
+    "type": "food",
+    "notes": "casual everyday lunch",
+    "approximate": true
+  },
+  "pet sitting": {
+    "ko": "펫시터",
+    "type": "service",
+    "notes": "Commonly used term for pet sitting services in Korea",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "phonies": {
+    "ko": "가짜",
+    "type": "slang",
+    "notes": "Korean slang for a fake or poser, used for insincere people.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "porcelain": {
+    "ko": "유리 피부",
+    "type": "other",
+    "notes": "Korean beauty term for flawless, glass‑like skin",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "prayer": {
+    "ko": "기도",
+    "type": "other",
+    "notes": "Common term for speaking to God in religious contexts",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "product": {
+    "ko": "상품",
+    "type": "other",
+    "notes": "Common term for a marketable item in Korean business",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "prom": {
+    "ko": "졸업식 뒤풀이",
+    "type": "event",
+    "approximate": true,
+    "notes": ""
+  },
+  "psychiatric facility": {
+    "ko": "정신과",
+    "type": "service",
+    "notes": "Commonly used term for a psychiatric facility in Korea.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "pumpkin spice": {
+    "ko": "호박죽",
+    "type": "food",
+    "notes": "가을 디저트인 호박죽이 펌프킨 스파이스의 한국식 대체품입니다.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "pumpkin spice latte": {
+    "ko": "고구마 라떼",
+    "type": "food",
+    "notes": "seasonal fall drink trope"
+  },
+  "radio": {
+    "ko": "라디오",
+    "type": "service",
+    "notes": "대중이 라디오 방송을 듣는 일반적인 용어",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "rain": {
+    "ko": "장마",
+    "type": "other",
+    "notes": "Korean speakers refer to the rainy season (장마) when discussing continuous rain.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "realtor": {
+    "ko": "직방",
+    "type": "service",
+    "notes": "Korea's most popular real‑estate listing app",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "roomie": {
+    "ko": "룸메",
+    "type": "slang",
+    "notes": "친구와 같이 사는 사람을 비하하거나 친근하게 부르는 말",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "root beer": {
+    "ko": "식혜",
+    "type": "food",
+    "notes": "",
+    "approximate": true
+  },
+  "sandwich": {
+    "ko": "김밥",
+    "type": "food",
+    "notes": "A common on‑the‑go snack often discarded half‑eaten.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "sat": {
+    "ko": "수능",
+    "type": "event",
+    "notes": "college entrance exam"
+  },
+  "skibidi": {
+    "ko": "스키디",
+    "type": "slang",
+    "notes": "화장실 개그 트렌드",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "snl": {
+    "ko": "개그콘서트",
+    "type": "pop_culture",
+    "notes": "sketch comedy institution",
+    "approximate": true
+  },
+  "spring break": {
+    "ko": "개강 전 여행",
+    "type": "event",
+    "notes": ""
+  },
+  "starbucks": {
+    "ko": "스타벅스",
+    "type": "brand",
+    "keep": true,
+    "notes": ""
+  },
+  "stranger things": {
+    "ko": "기묘한 이야기",
+    "type": "pop_culture",
+    "notes": "‘Strange Story’, the Korean title of the series.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "superbowl": {
+    "ko": "월드컵 결승",
+    "type": "pop_culture",
+    "notes": "nation-stopping sports event",
+    "approximate": true
+  },
+  "taylor swift": {
+    "ko": "아이유",
+    "type": "pop_culture",
+    "notes": "era-defining solo artist",
+    "approximate": true
+  },
+  "thanksgiving": {
+    "ko": "추석",
+    "type": "holiday",
+    "notes": "가족 모임 맥락"
+  },
+  "thanksgiving turkey": {
+    "ko": "송편",
+    "type": "food",
+    "notes": "holiday staple food",
+    "approximate": true
+  },
+  "therapy": {
+    "ko": "마음",
+    "type": "service",
+    "notes": "Korean mental‑health counseling app used for therapy",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "tiktok dance": {
+    "ko": "챌린지",
+    "type": "pop_culture",
+    "notes": ""
+  },
+  "tour dates": {
+    "ko": "공연 일정",
+    "type": "event",
+    "notes": "공연 일정은 공연이나 투어의 날짜와 시간을 의미합니다.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "tower of london": {
+    "ko": "첨성대",
+    "type": "other",
+    "notes": "Historic stone observatory tower, Korea’s iconic ancient tower.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "toyota camry": {
+    "ko": "쏘나타",
+    "type": "brand",
+    "notes": "Korea's popular midsize sedan analogous to the Camry",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "trader joe's": {
+    "ko": "이마트",
+    "type": "brand",
+    "notes": "",
+    "approximate": true
+  },
+  "train station": {
+    "ko": "역",
+    "type": "other",
+    "notes": "Colloquially used to refer to a train station in everyday conversation.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "turkey": {
+    "ko": "오리",
+    "type": "food",
+    "notes": "오리는 한국의 명절 요리로 터키와 비슷한 역할을 해요.",
+    "source": "retrieved",
+    "reviewed": true
+  },
+  "uber": {
+    "ko": "카카오택시",
+    "type": "brand",
+    "notes": ""
+  },
+  "vacation": {
+    "ko": "휴가",
+    "type": "event",
+    "notes": "Korean term for a planned work‑or‑school break, used similarly to “vacation”.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "venmo": {
+    "ko": "토스",
+    "type": "service",
+    "notes": ""
+  },
+  "war": {
+    "ko": "전쟁",
+    "type": "event",
+    "notes": "Korean term for war, used similarly to discuss global impacts.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "westminster abbey": {
+    "ko": "경복궁",
+    "type": "other",
+    "notes": "Korean palace that is a major historic landmark, often cited alongside other iconic sites.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "whatsapp": {
+    "ko": "카카오톡",
+    "type": "brand",
+    "notes": ""
+  },
+  "zelle": {
+    "ko": "카카오페이",
+    "type": "brand",
+    "notes": ""
+  },
+  "christ's": {
+    "ko": "예수님의",
+    "type": "other",
+    "notes": "Korean speakers refer to Jesus as 예수님 and his teachings as 예수님의 가르침.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "hard time": {
+    "ko": "고민",
+    "type": "other",
+    "notes": "Commonly used to express personal difficulty and the need to talk it through.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "forgiveness": {
+    "ko": "화해",
+    "type": "other",
+    "notes": "Koreans often refer to reconciliation (화해) when talking about letting go of resentment.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "father": {
+    "ko": "아빠",
+    "type": "other",
+    "notes": "Child's informal address for dad",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "math test": {
+    "ko": "수능",
+    "type": "other",
+    "notes": "Korean high‑stakes college entrance exam that includes a math section",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "redemption": {
+    "ko": "구원",
+    "type": "other",
+    "notes": "Korean term for salvation, the cultural analogue of redemption.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "relationship": {
+    "ko": "연애",
+    "type": "other",
+    "notes": "The term for a romantic partnership that Koreans commonly use in this context.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "friends": {
+    "ko": "친구",
+    "type": "other",
+    "notes": "Koreans naturally use 친구 to refer to friends in personal contexts.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "saturday": {
+    "ko": "토요일",
+    "type": "other",
+    "notes": "Korean speakers refer to Saturday as 토요일",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "overnight": {
+    "ko": "숙박",
+    "type": "other",
+    "notes": "Korean term for staying overnight, used when paying for lodging.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "same old same old": {
+    "ko": "맨날 똑같아",
+    "type": "slang",
+    "notes": "Casual reply meaning “nothing much, just the usual.”",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "faith": {
+    "ko": "신앙",
+    "type": "other",
+    "notes": "Korean term for religious faith",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "profits": {
+    "ko": "이익",
+    "type": "other",
+    "notes": "Korean business contexts naturally use 이윤/이익 to denote profit.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "tinsley": {
+    "ko": "김철수",
+    "type": "person",
+    "notes": "A common Korean placeholder name used for a business partner.",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "surprise": {
+    "ko": "서프라이즈",
+    "type": "event",
+    "notes": "loanword used for surprise",
+    "source": "retrieved",
+    "reviewed": false
+  },
+  "guidance": {
+    "ko": "상담",
+    "type": "other",
+    "notes": "Koreans would ask for 상담 (counseling) in this context.",
+    "source": "retrieved",
+    "reviewed": false
+  }
 }
