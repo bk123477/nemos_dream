@@ -23,7 +23,7 @@ data/reports/*.png
 !data/stage2/example.jsonl
 !data/reports/example_sft.json
 
-# slurm
+# misc log output
 logs/
 *.out
 *.err
