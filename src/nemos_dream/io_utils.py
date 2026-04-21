@@ -52,6 +52,78 @@ def write_jsonl(path: str | Path, rows: Iterable[BaseModel]) -> int:
     return count
 
 
+def append_jsonl(path: str | Path, rows: Iterable[BaseModel]) -> int:
+    """Append ``rows`` to ``path`` (one JSON object per line). Returns the count appended."""
+    p = Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    count = 0
+    with p.open("a", encoding="utf-8") as f:
+        for row in rows:
+            f.write(row.model_dump_json() + "\n")
+            count += 1
+    return count
+
+
+def read_processed_ids(path: str | Path, id_field: str = "id") -> set[str]:
+    """Return the set of ``id_field`` values already present in ``path``.
+
+    If the final line is a partial/corrupt JSON (e.g. process was killed mid-write),
+    it is truncated from the file in place so a subsequent append starts clean.
+    Missing file → empty set.
+    """
+    p = Path(path)
+    if not p.exists():
+        return set()
+
+    ids: set[str] = set()
+    raw_lines = p.read_text(encoding="utf-8").splitlines(keepends=True)
+    good_lines: list[str] = []
+    truncated = False
+
+    for line in raw_lines:
+        stripped = line.strip()
+        if not stripped:
+            good_lines.append(line)
+            continue
+        try:
+            obj = json.loads(stripped)
+        except json.JSONDecodeError:
+            truncated = True
+            break
+        rid = obj.get(id_field)
+        if rid:
+            ids.add(str(rid))
+        good_lines.append(line)
+
+    if truncated:
+        p.write_text("".join(good_lines), encoding="utf-8")
+    return ids
+
+
+def materialize_hf_to_jsonl(
+    spec: str,
+    output_path: str | Path,
+    *,
+    limit: int | None = None,
+    split: str = "train",
+) -> int:
+    """Download ``spec`` from HuggingFace and write ``RawInput`` rows to ``output_path``.
+
+    Writes in the same shape as ``data/stage1/example_input.jsonl`` so the
+    stage 1 runner can consume it unchanged. Returns the row count written.
+    """
+    full_spec = spec if ":" in spec else f"{spec}:{split}"
+    rows = load_hf_dataset(full_spec, limit=limit)
+    p = Path(output_path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    count = 0
+    with p.open("w", encoding="utf-8") as f:
+        for row in rows:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+            count += 1
+    return count
+
+
 def load_hf_dataset(
     spec: str,
     *,

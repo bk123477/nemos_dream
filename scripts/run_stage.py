@@ -27,6 +27,18 @@ def main() -> int:
     parser.add_argument("--accepted")
     parser.add_argument("--rejected")
     parser.add_argument(
+        "--hf-spec",
+        default=None,
+        help="Stage 1 only: HuggingFace dataset id to materialize into --input before running.",
+    )
+    parser.add_argument("--hf-split", default="train")
+    parser.add_argument("--hf-limit", type=int, default=4)
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Stage 1 only: overwrite the output file instead of resuming.",
+    )
+    parser.add_argument(
         "--num-records",
         type=int,
         default=None,
@@ -48,10 +60,26 @@ def main() -> int:
     args = parser.parse_args()
 
     if args.stage == 1:
+        input_path = args.input or "data/raw/soda.jsonl"
+        hf_spec = args.hf_spec
+        if hf_spec is None and not args.input:
+            hf_spec = "allenai/soda"
+        if hf_spec:
+            from nemos_dream.io_utils import materialize_hf_to_jsonl
+
+            n = materialize_hf_to_jsonl(
+                hf_spec,
+                input_path,
+                limit=args.hf_limit,
+                split=args.hf_split,
+            )
+            print(f"hf: wrote {n} rows from {hf_spec}:{args.hf_split} → {input_path}")
+
         from nemos_dream.stage1_decompose_map.runner import run
 
-        n = run(args.input, args.output)
-        print(f"stage 1: wrote {n} rows → {args.output}")
+        output_path = args.output or "data/stage1/stage1_output.jsonl"
+        n = run(input_path, output_path, overwrite=args.overwrite)
+        print(f"stage 1: wrote {n} rows → {output_path}")
     elif args.stage == 2:
         from nemos_dream.stage2_translate_rewrite.runner import run
 

@@ -17,7 +17,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from nemos_dream._proxy_patch import apply_proxy_patches
-from nemos_dream.io_utils import read_jsonl, write_jsonl
+from nemos_dream.io_utils import append_jsonl, read_jsonl, read_processed_ids, write_jsonl
 from nemos_dream.schemas import RawInput, Stage1Output
 
 from ._validator import validate_refs
@@ -31,8 +31,19 @@ def _row_id(row: RawInput) -> str:
     return row.id or f"soda-{row.original_index}"
 
 
-def run(input_path: str | Path, output_path: str | Path) -> int:
-    """Run stage 1 end-to-end. Returns number of rows written."""
+def run(
+    input_path: str | Path,
+    output_path: str | Path,
+    *,
+    overwrite: bool = False,
+) -> int:
+    """Run stage 1 end-to-end. Returns total row count in the output file.
+
+    Resume semantics: if ``output_path`` exists and ``overwrite`` is False,
+    already-processed ids are skipped and new results are appended.
+    A partial/corrupt final line (from a killed prior run) is truncated.
+    With ``overwrite=True`` the output file is replaced from scratch.
+    """
     if input_path is None:
         raise ValueError("stage 1 requires --input")
     if output_path is None:
@@ -42,11 +53,22 @@ def run(input_path: str | Path, output_path: str | Path) -> int:
     apply_proxy_patches()  # force httpx custom-transport (Data Designer) to honor HTTPS_PROXY
     use_llm_verify = os.environ.get("STAGE1_VALIDATE_LLM", "").lower() in {"1", "true", "yes"}
 
+    out_p = Path(output_path)
+    if overwrite and out_p.exists():
+        out_p.unlink()
+
+    processed_ids = read_processed_ids(out_p) if not overwrite else set()
+
     rows = list(read_jsonl(input_path, RawInput))
-    decomposed = decompose(rows)
+    rows_to_process = [r for r in rows if _row_id(r) not in processed_ids]
+
+    if not rows_to_process:
+        return len(processed_ids)
+
+    decomposed = decompose(rows_to_process)
 
     stage1_rows: list[Stage1Output] = []
-    for row, dr in zip(rows, decomposed, strict=True):
+    for row, dr in zip(rows_to_process, decomposed, strict=True):
         mapped = map_refs(
             list(dr.dialogue_decomposed.cultural_refs),
             dialogue=dr.turns,
@@ -62,4 +84,8 @@ def run(input_path: str | Path, output_path: str | Path) -> int:
             mapped_refs=mapped,
         ))
 
-    return write_jsonl(output_path, stage1_rows)
+    if processed_ids:
+        append_jsonl(out_p, stage1_rows)
+    else:
+        write_jsonl(out_p, stage1_rows)
+    return len(processed_ids) + len(stage1_rows)
