@@ -25,6 +25,15 @@ dependencies = [
     "langchain-nvidia-ai-endpoints>=0.3",  # LangChain ↔ NVIDIA NIM
     "datasets",                            # HF — `nvidia/Nemotron-Personas-Korea` (stage 2)
     "tavily-python",                       # web fallback for stage 1 cultural_map (dict→retriever→web+llm)
+    # Curator runtime deps (imported by `nemo_curator.stages.text.filters`)
+    "ftfy",                                # UnicodeReformatter dep
+    "beautifulsoup4",                      # code.py filter dep
+    "justext",                             # boilerplate filter dep
+    "fasttext-wheel",                      # FastTextLangId/FastTextQualityFilter dep
+    "sentencepiece",                       # tokenizer for Curator code filter
+    # PII gate (Curator 1.1 dropped its PiiModifier; we call Presidio directly)
+    "presidio-analyzer",
+    "presidio-anonymizer",
 ]
 
 [dependency-groups]
