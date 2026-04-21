@@ -14,6 +14,8 @@ uv.lock.bak
 .env.local
 
 # data products (keep raw inputs, discard generated)
+data/persona_age_gender/
+data/stage2/artifacts/
 
 # misc log output
 logs/

@@ -1,21 +1,28 @@
-# Stage 2 — Korean translation + persona/style-conditioned rewrite config.
+# Stage 2 — persona retrieval + rewrite pipeline defaults.
 
-model:
-  alias: nemotron_nano
-  provider: nvidia
-  model: nvidia/nemotron-3-nano-30b-a3b
-  base_url: https://integrate.api.nvidia.com/v1
-  api_key_env: NVIDIA_API_KEY
-  temperature: 0.9
+paths:
+  persona_dir: data/persona_age_gender
+  step3_output: data/stage2/stage2_rewrite.jsonl
+  final_output: data/stage2/out.jsonl
+  artifacts_dir: data/stage2/artifacts
 
 personas:
-  dataset: nvidia/Nemotron-Personas-Korea
-  split: train
-  cache_dir: .cache/hf
+  google_drive_url: https://drive.google.com/drive/folders/1SGrM4gG4kz155nJTqV7aFZgkSehhGXgF?usp=sharing
+  local_dirname: persona_age_gender
+
+model:
+  step3:
+    model: nvidia/nemotron-3-super-120b-a12b
+    endpoint: https://integrate.api.nvidia.com/v1
+  step4:
+    model: nvidia/nemotron-3-super-120b-a12b
+    endpoint: https://integrate.api.nvidia.com/v1
+
+run:
+  seed: 7
+  mode: create
 
 targets:
-  # Sampling distribution for translation_meta when the stage chooses a target
-  # bucket rather than letting each speaker drift freely.
   platforms: [twitter, instagram, reddit, tiktok, thread]
   age_groups: [teen, 20s, 30s]
   gender_styles: [masc, fem, neutral]

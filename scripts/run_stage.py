@@ -26,6 +26,25 @@ def main() -> int:
     parser.add_argument("--output-dir")
     parser.add_argument("--accepted")
     parser.add_argument("--rejected")
+    parser.add_argument(
+        "--num-records",
+        type=int,
+        default=None,
+        help="Optionally limit the number of input rows. Currently used by stage 2.",
+    )
+    parser.add_argument(
+        "--resume",
+        dest="resume",
+        action="store_true",
+        help="Resume from existing output and queue files when supported by the stage.",
+    )
+    parser.add_argument(
+        "--no-resume",
+        dest="resume",
+        action="store_false",
+        help="Ignore existing output and start a fresh run when supported by the stage.",
+    )
+    parser.set_defaults(resume=True)
     args = parser.parse_args()
 
     if args.stage == 1:
@@ -36,7 +55,12 @@ def main() -> int:
     elif args.stage == 2:
         from nemos_dream.stage2_translate_rewrite.runner import run
 
-        n = run(args.input, args.output)
+        n = run(
+            args.input,
+            args.output,
+            num_records=args.num_records,
+            resume=args.resume,
+        )
         print(f"stage 2: wrote {n} rows → {args.output}")
     elif args.stage == 3:
         from nemos_dream.stage3_validate.runner import run

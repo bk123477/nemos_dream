@@ -13,6 +13,7 @@ dependencies = [
     "pydantic>=2.6",
     "python-dotenv",
     "pyyaml",
+    "gdown>=5.2",
     "tqdm",
     "numpy",
     "pandas>=2.0",

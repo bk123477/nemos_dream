@@ -27,6 +27,9 @@ layered JSONL artifacts under `data/stage{N}/`.
 | 3 | `stage3_validate` | TBD | `Stage2Output` | `Stage3Output` |
 | 4 | `stage4_report` | TBD | `Stage3Output` | `Stage4Sft` + report |
 
+Stage 2 also depends on a local persona bank under `data/persona_age_gender/`,
+which is created by `uv run python -m nemos_dream.stage2_translate_rewrite.persona_downloader`.
+
 **Stage owners start here:** `.claude/docs/stage-owner-guide.md` — one-page
 playbook per stage. For deeper reference: `.claude/docs/architecture.md`
 (data flow), `.claude/docs/stage-contracts.md` (schema per boundary), and
@@ -45,15 +48,20 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 # 2. Install dependencies (single flat set — base + NVIDIA Nemotron stack)
 uv sync
 
-# 3. Run tests — the schema round-trip test must pass on a fresh clone.
+# 3. Download the stage-2 persona bank required for rewrite runs.
+uv run python -m nemos_dream.stage2_translate_rewrite.persona_downloader
+
+# 4. Run tests — the schema round-trip test must pass on a fresh clone.
 uv run pytest
 
-# 4. Run a single stage
+# 5. Run a single stage
 uv run python scripts/run_stage.py --stage 1 \
     --input data/raw/sample_input.jsonl \
     --output data/stage1/out.jsonl
 
-# 5. End-to-end run
+# Stage 2 requires data/persona_age_gender/, which the downloader creates.
+
+# 6. End-to-end run
 uv run python scripts/run_pipeline.py --input data/raw/sample_input.jsonl
 ```
 
@@ -74,7 +82,7 @@ Full model IDs, env vars, and endpoints: `.claude/docs/nvidia-stack.md`.
 nemos_dream/
 ├── pyproject.toml                   uv-managed, single flat dep list (base + NVIDIA stack)
 ├── configs/                         pipeline.yaml + stage{1..4}/*.yaml
-├── data/                            raw/ + stage{1,2,3}/ + reports/
+├── data/                            raw/ + persona_age_gender/ + stage{1,2,3}/ + reports/
 ├── src/nemos_dream/
 │   ├── schemas.py                    ★ canonical contract (only file with real logic)
 │   ├── io_utils.py                   shared JSONL / HF loaders
