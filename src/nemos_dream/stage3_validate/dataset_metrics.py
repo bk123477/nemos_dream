@@ -58,8 +58,8 @@ def _tokenise(text: str) -> list[str]:
 
 
 def _row_text(row: Stage3Output) -> str:
-    parts = [t.text for t in row.source_dialogue]
-    return " \n ".join(parts)
+    turns = row.final_dialogue or row.korean_dialogue
+    return " \n ".join(t.text for t in turns)
 
 
 def _distinct_n(texts: list[str], n: int) -> float:
@@ -272,7 +272,7 @@ def compute(
     surface failure modes.
     """
     all_rows = accepted + rejected
-    src_texts = [_row_text(r) for r in accepted]
+    kr_texts = [_row_text(r) for r in accepted]
 
     return {
         "counts": {
@@ -283,9 +283,9 @@ def compute(
         "reward_distribution": _reward_distribution(accepted),
         "embedding_diversity": _embedding_diversity(accepted, embed_fn),
         "distinct_n": {
-            "1": _distinct_n(src_texts, 1),
-            "2": _distinct_n(src_texts, 2),
-            "3": _distinct_n(src_texts, 3),
+            "1": _distinct_n(kr_texts, 1),
+            "2": _distinct_n(kr_texts, 2),
+            "3": _distinct_n(kr_texts, 3),
         },
         "decomposed_coverage_entropy": _decomposed_coverage_entropy(accepted),
         "cultural_ref_diversity": _cultural_ref_diversity(accepted),

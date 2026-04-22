@@ -1,309 +1,5 @@
 [
   {
-    "id": "soda-6027731",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Veda",
-        "text": "Hi, Father. I'm Veda. I'm new to the area and was curious about your church. Could you tell me a little bit about it?"
-      },
-      {
-        "index": 1,
-        "speaker": "Priest",
-        "text": "Of course, Veda. Our church is based on the teachings of Jesus Christ. We believe in loving our neighbor and treating others as we would want to be treated. We strive to live according to Christ's example and teachings."
-      },
-      {
-        "index": 2,
-        "speaker": "Veda",
-        "text": "That sounds like a really great way to live. I can see why so many people are drawn to this religion. What do you think makes Christianity different from other religions?"
-      },
-      {
-        "index": 3,
-        "speaker": "Priest",
-        "text": "Well, there are a lot of different interpretations of Christianity, but for us, it's all about following Jesus Christ's example. He was a man who loved unconditionally and forgave easily. He preached compassion and understanding, even for those who disagreed with him or did not follow his teachings perfectly. We try to emulate that in our own lives.\""
-      },
-      {
-        "index": 4,
-        "speaker": "Veda",
-        "text": "That does sound different. I know that forgiveness is a big part of Christianity, but it's not always easy to do. How do you think Christians are able to forgive so easily?"
-      },
-      {
-        "index": 5,
-        "speaker": "Priest",
-        "text": "Well, I think it comes from our belief that everyone is capable of change and redemption. We believe that no one is beyond hope or help, and so we are always willing to forgive those who have wronged us. It's not always easy, but it is something we strive for."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'register_consistency', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "register_consistency",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "church",
-        "ko": "교회",
-        "type": "service",
-        "source": "dict",
-        "retrieved": false,
-        "notes": "종교 예배가 열리는 공동체 공간",
-        "validation": []
-      },
-      {
-        "term": "christianity",
-        "ko": "기독교",
-        "type": "other",
-        "source": "dict",
-        "retrieved": false,
-        "notes": "major religion in Korea",
-        "validation": []
-      },
-      {
-        "term": "jesus",
-        "ko": "예수님",
-        "type": "other",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean Christians refer to Jesus as 예수님, the standard term used in religious contexts.",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027739",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Rylea",
-        "text": "Hey Shavon, what's up? You seem troubled."
-      },
-      {
-        "index": 1,
-        "speaker": "Shavon",
-        "text": "Yeah, I am. I'm just having a hard time and needed someone to talk to."
-      },
-      {
-        "index": 2,
-        "speaker": "Rylea",
-        "text": "Of course, man. I'm always here for you. What's going on?"
-      },
-      {
-        "index": 3,
-        "speaker": "Shavon",
-        "text": "It's just everything. Work is stressing me out, my relationship is falling apart, and I feel like I'm losing touch with my friends. I don't know what to do."
-      },
-      {
-        "index": 4,
-        "speaker": "Rylea",
-        "text": "Well, let's start with work then. What's going on there?"
-      },
-      {
-        "index": 5,
-        "speaker": "Shavon",
-        "text": "It's just that everything is so demanding and I can't keep up. I'm constantly behind and it feels like I'm never going to catch up."
-      },
-      {
-        "index": 6,
-        "speaker": "Rylea",
-        "text": "Okay, that does sound pretty tough. But it sounds like you're doing the best you can under the circumstances. Maybe you just need to cut yourself some slack and focus on one thing at a time. As for your relationship, what's going on there?"
-      },
-      {
-        "index": 7,
-        "speaker": "Shavon",
-        "text": "We're just fighting all the time and it feels like we're growing apart instead of together. I don't know if we can make it through this rough patch."
-      },
-      {
-        "index": 8,
-        "speaker": "Rylea",
-        "text": "Do you still love her?"
-      },
-      {
-        "index": 9,
-        "speaker": "Shavon",
-        "text": "Yes, I do. But it's just so hard right now."
-      },
-      {
-        "index": 10,
-        "speaker": "Rylea",
-        "text": "Then you should definitely try to work things out. It sounds like you're going through a lot right now, but your friends are still here for you. So don't forget that."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase2",
-        "rule": "turn_count_parity",
-        "detail": "KR turn count 10 != EN turn count 11",
-        "extra": {
-          "kr": 10,
-          "en": 11
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage1_redecompose",
-        "reason_summary": "KR turn count disagrees with EN — re-decompose dialogue",
-        "hints": {
-          "rule": "turn_count_parity"
-        }
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "man",
-        "ko": "오빠",
-        "type": "slang",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Used by females to address an older male friend informally.",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027743",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Jabriel",
-        "text": "Hi there! Are you looking for someone to take care of your pet while you're out of town?"
-      },
-      {
-        "index": 1,
-        "speaker": "Client",
-        "text": "Yes, I am. I'm going on vacation for a week and I need someone to watch my cat."
-      },
-      {
-        "index": 2,
-        "speaker": "Jabriel",
-        "text": "That's no problem at all! I love taking care of animals, and I have experience with cats. I'll be happy to take care of your cat while you're gone."
-      },
-      {
-        "index": 3,
-        "speaker": "Client",
-        "text": "That sounds great. How much do you charge?"
-      },
-      {
-        "index": 4,
-        "speaker": "Jabriel",
-        "text": "I charge $20 per day, plus an additional $10 per day if you want me to stay overnight."
-      },
-      {
-        "index": 5,
-        "speaker": "Client",
-        "text": "That sounds reasonable. I'll definitely need you to stay overnight, so it will be $30 per day total. When can you start?"
-      },
-      {
-        "index": 6,
-        "speaker": "Jabriel",
-        "text": "Any time that works for you! Just let me know when you'll be leaving and when you'll be back, and I'll take care of everything in between."
-      },
-      {
-        "index": 7,
-        "speaker": "Client",
-        "text": "Alright, I'll be leaving on Saturday and I'll be back next Saturday. Can you come over on Friday evening to meet my cat and get everything set up?"
-      },
-      {
-        "index": 8,
-        "speaker": "Jabriel",
-        "text": "Yes, that sounds perfect. I'll see you on Friday at 6pm."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase2",
-        "rule": "ascii_ratio",
-        "detail": "KR ASCII-alnum ratio 0.26 > max 0.20",
-        "extra": {
-          "ratio": 0.2628504672897196,
-          "max": 0.2,
-          "filter": "curator.DocumentFilter"
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "pet sitting",
-        "ko": "펫시터",
-        "type": "service",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean term for pet sitter used in apps like 펫시터",
-        "validation": []
-      }
-    ]
-  },
-  {
     "id": "soda-6027745",
     "source_dialogue": [
       {
@@ -364,25 +60,17 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
+        "stage": "stage3.phase3",
+        "rule": "safety",
+        "detail": "content flagged by NeMoGuard safety check",
+        "extra": {}
       }
     ],
     "retry_actions": [
       {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
+        "action": "none",
+        "reason_summary": "safety reject — drop, do not retry",
+        "hints": {}
       }
     ],
     "mapped_refs": []
@@ -429,14 +117,11 @@
     "reject_reasons": [
       {
         "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
+        "rule": "aggregate_floor",
+        "detail": "aggregate 3.29 < floor 3.50",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "aggregate": 3.294,
+          "floor": 3.5
         }
       }
     ],
@@ -499,13 +184,6 @@
         "action": "websearch_cultural",
         "reason_summary": "re-resolve cultural refs from updated web context",
         "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
       }
     ],
     "mapped_refs": [
@@ -556,14 +234,12 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
+        "stage": "stage3.phase4",
+        "rule": "intra_kr_coherence",
+        "detail": "mean adjacent-turn cosine 0.409 < floor 0.550",
         "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
+          "score": 0.4093358731431957,
+          "floor": 0.55
         }
       }
     ],
@@ -636,81 +312,6 @@
         "action": "websearch_cultural",
         "reason_summary": "re-resolve cultural refs from updated web context",
         "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027764",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Aariz",
-        "text": "Hi, Pietro. How are you doing today?"
-      },
-      {
-        "index": 1,
-        "speaker": "Pietro",
-        "text": "I'm doing well, Aariz. Thanks for speaking with me."
-      },
-      {
-        "index": 2,
-        "speaker": "Aariz",
-        "text": "Of course! So, what's been going on?"
-      },
-      {
-        "index": 3,
-        "speaker": "Pietro",
-        "text": "Well, I've just been really busy lately. Work has been keeping me busy and I haven't had much time for anything else."
-      },
-      {
-        "index": 4,
-        "speaker": "Aariz",
-        "text": "That sounds tough. I know how it feels to be too busy to do anything else but work. It's not fun."
-      },
-      {
-        "index": 5,
-        "speaker": "Pietro",
-        "text": "Yeah, it's not fun at all. But I'm trying to make the best of it."
-      },
-      {
-        "index": 6,
-        "speaker": "Aariz",
-        "text": "That's good! I think that's the best we can do in situations like these. Just try to keep our heads up and power through it."
-      },
-      {
-        "index": 7,
-        "speaker": "Pietro",
-        "text": "Yeah, that's what I'm trying to do. Thanks for the encouragement, Aariz"
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
       }
     ],
     "mapped_refs": []
@@ -751,31 +352,16 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
+        "stage": "stage3.phase4",
+        "rule": "intra_kr_coherence",
+        "detail": "mean adjacent-turn cosine 0.537 < floor 0.550",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "score": 0.5366764233997897,
+          "floor": 0.55
         }
       }
     ],
     "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
       {
         "action": "stage2_rewrite",
         "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
@@ -842,33 +428,16 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'cultural_appropriateness', 'persona_style_consistency']",
+        "stage": "stage3.phase4",
+        "rule": "intra_kr_coherence",
+        "detail": "mean adjacent-turn cosine 0.499 < floor 0.550",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "cultural_appropriateness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "score": 0.49894348106066505,
+          "floor": 0.55
         }
       }
     ],
     "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
       {
         "action": "stage2_rewrite",
         "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
@@ -894,99 +463,6 @@
         "source": "web+llm",
         "retrieved": true,
         "notes": "Korean term for war, used similarly to discuss global impacts.",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027790",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Tatianna",
-        "text": "Hey, thanks for taking my motorcycle off my hands. I really appreciate it."
-      },
-      {
-        "index": 1,
-        "speaker": "Man",
-        "text": "No problem, man. It's a nice bike. I'm sure I'll enjoy riding it."
-      },
-      {
-        "index": 2,
-        "speaker": "Tatianna",
-        "text": "I'm just glad to be rid of it, to be honest. It was costing me a lot in repairs and maintenance."
-      },
-      {
-        "index": 3,
-        "speaker": "Man",
-        "text": "Yeah, motorcycles can be pretty expensive to keep up. But they're also a lot of fun to ride. So it's worth it, in my opinion."
-      },
-      {
-        "index": 4,
-        "speaker": "Tatianna",
-        "text": "I'm not so sure. I think I'd rather just take the bus from now on. It's cheaper and less hassle."
-      },
-      {
-        "index": 5,
-        "speaker": "Man",
-        "text": "That's a valid point. But sometimes it's nice to have the freedom that a motorcycle provides. You can go where you want, when you want."
-      },
-      {
-        "index": 6,
-        "speaker": "Tatianna",
-        "text": "I guess that's true. But it's just not worth the expense for me anymore."
-      },
-      {
-        "index": 7,
-        "speaker": "Man",
-        "text": "Well, I'm glad you sold it to me. I'll take good care of it."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'cultural_appropriateness', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "cultural_appropriateness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "motorcycle",
-        "ko": "오토바이",
-        "type": "other",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Koreans commonly refer to a motorcycle as 오토바이 in everyday conversation.",
         "validation": []
       }
     ]
@@ -1038,77 +514,11 @@
     "reject_reasons": [
       {
         "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
+        "rule": "aggregate_floor",
+        "detail": "aggregate 3.29 < floor 3.50",
         "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027794",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Yitzchok",
-        "text": "I'm sorry, Daddy."
-      },
-      {
-        "index": 1,
-        "speaker": "Father",
-        "text": "Why did you let the dog go?"
-      },
-      {
-        "index": 2,
-        "speaker": "Yitzchok",
-        "text": "He was whimpering and I felt bad."
-      },
-      {
-        "index": 3,
-        "speaker": "Father",
-        "text": "Now we'll never find him."
-      },
-      {
-        "index": 4,
-        "speaker": "Yitzchok",
-        "text": "I'm sorry."
-      },
-      {
-        "index": 5,
-        "speaker": "Father",
-        "text": "Yitzchok, you have to be more careful. We can't just let animals go because we feel bad for them."
-      },
-      {
-        "index": 6,
-        "speaker": "Yitzchok",
-        "text": "I know, Daddy. I'm sorry."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "aggregate": 3.294,
+          "floor": 3.5
         }
       }
     ],
@@ -1159,134 +569,12 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
+        "stage": "stage3.phase4",
+        "rule": "intra_kr_coherence",
+        "detail": "mean adjacent-turn cosine 0.531 < floor 0.550",
         "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027822",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Deandra",
-        "text": "Thank you so much for all your help in selling my house. I really appreciate it."
-      },
-      {
-        "index": 1,
-        "speaker": "Realtor",
-        "text": "You're welcome, Deandra. It was my pleasure to help you out. I'm just glad that everything went smoothly and that the house sold quickly."
-      },
-      {
-        "index": 2,
-        "speaker": "Deandra",
-        "text": "Yeah, me too. I'm really excited about the move, but it's a bit bittersweet leaving this place behind. It's been my home for so long."
-      },
-      {
-        "index": 3,
-        "speaker": "Realtor",
-        "text": "I know how you feel. It can be tough to let go of a place that holds so many memories. But sometimes change can be a good thing, and it sounds like this new opportunity is going to be great for you. Plus, you never know - maybe you'll end up coming back to this city someday and buying another house here! Stranger things have happened. ;)"
-      },
-      {
-        "index": 4,
-        "speaker": "Deandra",
-        "text": "Ha, yeah. I guess you're right. Change can be good. Thanks for everything, again."
-      },
-      {
-        "index": 5,
-        "speaker": "Realtor",
-        "text": "You're welcome. Good luck with everything!"
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase3",
-        "rule": "safety",
-        "detail": "content flagged by NeMoGuard safety check",
-        "extra": {}
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "none",
-        "reason_summary": "safety reject — drop, do not retry",
-        "hints": {}
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "realtor",
-        "ko": "직방",
-        "type": "service",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korea's largest real‑estate platform",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027830",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Salah",
-        "text": "Sarah, I love the outdoors! I love hiking and camping, and spending time in nature. It's just so beautiful and peaceful out there."
-      },
-      {
-        "index": 1,
-        "speaker": "Sarah",
-        "text": "Yeah, I know what you mean. There's just something about being in nature that feels so good for the soul."
-      },
-      {
-        "index": 2,
-        "speaker": "Salah",
-        "text": "I know! I feel so connected to the world when I'm outdoors. It's like everything just makes sense."
-      },
-      {
-        "index": 3,
-        "speaker": "Sarah",
-        "text": "Yeah, it's like you can finally breathe and relax."
-      },
-      {
-        "index": 4,
-        "speaker": "Salah",
-        "text": "Exactly! I feel so lucky that we live in a place where we have access to all of this beautiful nature."
-      },
-      {
-        "index": 5,
-        "speaker": "Sarah",
-        "text": "Yes, it definitely makes living here worth it."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "score": 0.531001751263757,
+          "floor": 0.55
         }
       }
     ],
@@ -1367,15 +655,14 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
+        "stage": "stage3.phase2",
+        "rule": "mapped_ref_surface",
+        "detail": "2 mapped_ref.ko missing from KR text: ['인천공항', 'N서울타워']",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "missing": [
+            "인천공항",
+            "N서울타워"
+          ]
         }
       }
     ],
@@ -1391,13 +678,6 @@
         "action": "websearch_cultural",
         "reason_summary": "re-resolve cultural refs from updated web context",
         "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
       }
     ],
     "mapped_refs": [
@@ -1517,38 +797,20 @@
     "reject_reasons": [
       {
         "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'cultural_appropriateness', 'register_consistency', 'persona_style_consistency']",
+        "rule": "aggregate_floor",
+        "detail": "aggregate 3.47 < floor 3.50",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "cultural_appropriateness",
-            "register_consistency",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "aggregate": 3.471,
+          "floor": 3.5
         }
       }
     ],
     "retry_actions": [
       {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
         "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
+        "reason_summary": "aggregate judge score below floor",
         "hints": {
-          "axis": "register_consistency"
+          "aggregate": 3.471
         }
       }
     ],
@@ -1563,148 +825,6 @@
         "validation": []
       }
     ]
-  },
-  {
-    "id": "soda-6027847",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Naydelin",
-        "text": "I'm not going back to that school. I hate it."
-      },
-      {
-        "index": 1,
-        "speaker": "Phoebe",
-        "text": "Why do you keep getting kicked out?"
-      },
-      {
-        "index": 2,
-        "speaker": "Naydelin",
-        "text": "I don't know. I just don't like it there, that's all. And all the kids are phony."
-      },
-      {
-        "index": 3,
-        "speaker": "Phoebe",
-        "text": "What's a phony?"
-      },
-      {
-        "index": 4,
-        "speaker": "Naydelin",
-        "text": "You know, someone who's not real, who puts on an act. All the kids at my school are phonies. They're all trying to be something they're not. It's all a big act."
-      },
-      {
-        "index": 5,
-        "speaker": "Phoebe",
-        "text": "But what are you trying to be?"
-      },
-      {
-        "index": 6,
-        "speaker": "Naydelin",
-        "text": "I don't know...I'm just myself, I guess. But everyone else is always putting on an act and it drives me crazy."
-      },
-      {
-        "index": 7,
-        "speaker": "Phoebe",
-        "text": "You're not going back to school and you don't know what you want to do with your life. Is that it?"
-      },
-      {
-        "index": 8,
-        "speaker": "Naydelin",
-        "text": "I guess so. Yeah, pretty much."
-      },
-      {
-        "index": 9,
-        "speaker": "Phoebe",
-        "text": "Well, what are you going to do?"
-      },
-      {
-        "index": 10,
-        "speaker": "Naydelin",
-        "text": "I don't know. Maybe just travel around or something. See the country."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027852",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Sade",
-        "text": "I'm telling you, man, she is just too good for me. I don't deserve her."
-      },
-      {
-        "index": 1,
-        "speaker": "Friend",
-        "text": "Dude, stop being so negative. You're a great guy and she clearly loves you."
-      },
-      {
-        "index": 2,
-        "speaker": "Sade",
-        "text": "I don't know...I just feel like I'm not good enough for her. She's so amazing and I'm just...I don't know."
-      },
-      {
-        "index": 3,
-        "speaker": "Friend",
-        "text": "Sade, you are an amazing guy and she loves you. Just relax and enjoy it."
-      },
-      {
-        "index": 4,
-        "speaker": "Sade",
-        "text": "I guess you're right. I'm just being too hard on myself."
-      },
-      {
-        "index": 5,
-        "speaker": "Friend",
-        "text": "Exactly. Now go enjoy your amazing girlfriend. You deserve it!"
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
   },
   {
     "id": "soda-6027853",
@@ -1743,31 +863,15 @@
     "reject_reasons": [
       {
         "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'persona_style_consistency']",
+        "rule": "aggregate_floor",
+        "detail": "aggregate 3.35 < floor 3.50",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "aggregate": 3.353,
+          "floor": 3.5
         }
       }
     ],
     "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
       {
         "action": "stage2_rewrite",
         "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
@@ -1829,15 +933,13 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
+        "stage": "stage3.phase2",
+        "rule": "mapped_ref_surface",
+        "detail": "1 mapped_ref.ko missing from KR text: ['고등학교']",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "missing": [
+            "고등학교"
+          ]
         }
       }
     ],
@@ -1853,13 +955,6 @@
         "action": "websearch_cultural",
         "reason_summary": "re-resolve cultural refs from updated web context",
         "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
       }
     ],
     "mapped_refs": [
@@ -1931,13 +1026,11 @@
     "reject_reasons": [
       {
         "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
+        "rule": "aggregate_floor",
+        "detail": "aggregate 2.53 < floor 3.50",
         "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
+          "aggregate": 2.529,
+          "floor": 3.5
         }
       }
     ],
@@ -2011,30 +1104,15 @@
     "reject_reasons": [
       {
         "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
+        "rule": "aggregate_floor",
+        "detail": "aggregate 3.29 < floor 3.50",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "aggregate": 3.294,
+          "floor": 3.5
         }
       }
     ],
     "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
       {
         "action": "stage2_rewrite",
         "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
@@ -2118,213 +1196,6 @@
         "action": "websearch_cultural",
         "reason_summary": "re-resolve cultural refs from updated web context",
         "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027871",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Jazz",
-        "text": "I'm really glad you gave me the opportunity to lead the team in your absence. It's something I've been wanting to do for a while now."
-      },
-      {
-        "index": 1,
-        "speaker": "Boss",
-        "text": "Well, you certainly proved yourself today. You did a great job leading the team and handling everything that came up. I'm impressed."
-      },
-      {
-        "index": 2,
-        "speaker": "Jazz",
-        "text": "Thank you, I appreciate that. I really wanted to show you that I'm capable of leading and managing the team effectively."
-      },
-      {
-        "index": 3,
-        "speaker": "Boss",
-        "text": "You definitely did that today. You showed excellent leadership skills and made sure everything ran smoothly. I'll be happy to recommend you for future leadership opportunities."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027874",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Vicki",
-        "text": "I just feel so trapped, man. I can't even begin to tell you how unhappy I am right now."
-      },
-      {
-        "index": 1,
-        "speaker": "Alex",
-        "text": "Yeah, I can imagine. It's been tough for you lately."
-      },
-      {
-        "index": 2,
-        "speaker": "Vicki",
-        "text": "It feels like everything is just falling apart and there's nothing I can do about it. I'm just stuck here, living off my parents and barely scraping by."
-      },
-      {
-        "index": 3,
-        "speaker": "Alex",
-        "text": "Have you looked into getting a job?"
-      },
-      {
-        "index": 4,
-        "speaker": "Vicki",
-        "text": "Yeah, I've been applying to places but it's been months and I haven't had any luck. And even if I did get a job, it wouldn't be enough to get me out of this hole I'm in."
-      },
-      {
-        "index": 5,
-        "speaker": "Alex",
-        "text": "Well, what about going back to school? You could get a degree and then look for a better paying job."
-      },
-      {
-        "index": 6,
-        "speaker": "Vicki",
-        "text": "Yeah, but that would take years and I don't know if I can wait that long. Plus, I don't even know if that would guarantee me a good job after all that time and money spent on school."
-      },
-      {
-        "index": 7,
-        "speaker": "Alex",
-        "text": "Have you considered moving out of your parents' place?"
-      },
-      {
-        "index": 8,
-        "speaker": "Vicki",
-        "text": "Yeah, I've thought about it but I can't afford it on my own. And even if I could find a roommate, I don't know if I could handle living with someone else right now."
-      },
-      {
-        "index": 9,
-        "speaker": "Alex",
-        "text": "Well, what do you want to do then? Just stay here and be unhappy for the rest of your life?"
-      },
-      {
-        "index": 10,
-        "speaker": "Vicki",
-        "text": "No, of course not. But it feels like no matter what I do, I'm just stuck in this rut and I don't know how to get out of it."
-      },
-      {
-        "index": 11,
-        "speaker": "Alex",
-        "text": "Vicki, you're not going to be stuck in this forever. Things will get better, you just have to be patient and keep trying. Everything will work out in the end, trust me."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027885",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Mahnoor",
-        "text": "Wow, I can't believe I built this all by myself! It looks amazing."
-      },
-      {
-        "index": 1,
-        "speaker": "Sarah",
-        "text": "You did a great job, Mahnoor. This building is really impressive."
-      },
-      {
-        "index": 2,
-        "speaker": "Mahnoor",
-        "text": "Thanks, Sarah. I'm pretty proud of it. It took a lot of hard work, but it was worth it."
-      },
-      {
-        "index": 3,
-        "speaker": "Sarah",
-        "text": "I can imagine. How long did it take you to build it?"
-      },
-      {
-        "index": 4,
-        "speaker": "Mahnoor",
-        "text": "Oh, about a month. I worked on it every day after school and on weekends."
-      },
-      {
-        "index": 5,
-        "speaker": "Sarah",
-        "text": "That's a really long time. I don't think I could've been that patient."
-      },
-      {
-        "index": 6,
-        "speaker": "Mahnoor",
-        "text": "Yeah, it was tough at times. But like I said, it was worth it in the end."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
       }
     ],
     "mapped_refs": []
@@ -2365,185 +1236,17 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
+        "stage": "stage3.phase3",
+        "rule": "safety",
+        "detail": "content flagged by NeMoGuard safety check",
+        "extra": {}
       }
     ],
     "retry_actions": [
       {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027901",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Tenley",
-        "text": "Hey, Sarah. What's up?"
-      },
-      {
-        "index": 1,
-        "speaker": "Sarah",
-        "text": "Hey! Not much, what about you?"
-      },
-      {
-        "index": 2,
-        "speaker": "Tenley",
-        "text": "Same here. Just getting ready for school. I don't really like having to think about what to wear every day, so I just stick to the same outfit."
-      },
-      {
-        "index": 3,
-        "speaker": "Sarah",
-        "text": "Yeah, I can understand that. I'm always trying to find new outfits and it's just a lot of work. Plus, it's hard to find something that looks good and is also comfortable."
-      },
-      {
-        "index": 4,
-        "speaker": "Tenley",
-        "text": "Exactly! I don't want to have to worry about whether my clothes are going to be uncomfortable or if they're going to look good. I just want to be able to put on the same thing every day and know that it will work."
-      },
-      {
-        "index": 5,
-        "speaker": "Sarah",
-        "text": "Yeah, that would be nice. But sometimes it's fun to mix things up and try new styles. Have you ever tried wearing something different?"
-      },
-      {
-        "index": 6,
-        "speaker": "Tenley",
-        "text": "No, not really. I mean, I'll switch out my shoes sometimes or wear a different color shirt, but nothing too drastic. I like knowing what I'm going to wear each day. It makes getting dressed in the morning a lot easier."
-      },
-      {
-        "index": 7,
-        "speaker": "Sarah",
-        "text": "I can see that. But it must get kind of boring wearing the same thing all the time."
-      },
-      {
-        "index": 8,
-        "speaker": "Tenley",
-        "text": "Not really. I don't really care what other people think about my clothes. I'm comfortable with what I'm wearing and that's all that matters to me."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'cultural_appropriateness', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "cultural_appropriateness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
+        "action": "none",
+        "reason_summary": "safety reject — drop, do not retry",
         "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "converse",
-        "ko": "슈펜",
-        "type": "brand",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean low‑cost sneaker brand comparable to Converse",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027904",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Anastazia",
-        "text": "Hey, Sasha. How are you doing?"
-      },
-      {
-        "index": 1,
-        "speaker": "Sasha",
-        "text": "I'm doing alright. Just been a little stressed lately. School is just really tough right now."
-      },
-      {
-        "index": 2,
-        "speaker": "Anastazia",
-        "text": "Yeah, I can imagine. But you're so smart, I'm sure you'll get through it no problem. You always seem to find a way to succeed no matter what the challenge is."
-      },
-      {
-        "index": 3,
-        "speaker": "Sasha",
-        "text": "Thanks, Anastazia. That means a lot coming from you. You're just always so confident and everything seems to come so easily to you. I wish I could be more like that."
-      },
-      {
-        "index": 4,
-        "speaker": "Anastazia",
-        "text": "To be honest, it's not all rainbows and butterflies like it may seem from the outside looking in. I have my own struggles and insecurities too, we all do. It's just a matter of not letting them get the best of us and continuing to push forward no matter what life throws our way"
-      },
-      {
-        "index": 5,
-        "speaker": "Sasha",
-        "text": "You're right. We all have our own battles to fight. But it's good to know that even someone like you who seems to have it all together still has to deal with the same issues as everyone else."
-      },
-      {
-        "index": 6,
-        "speaker": "Anastazia",
-        "text": "Exactly. No one is perfect. We're all just human beings doing the best we can with what we have."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
       }
     ],
     "mapped_refs": []
@@ -2605,30 +1308,15 @@
     "reject_reasons": [
       {
         "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness']",
+        "rule": "aggregate_floor",
+        "detail": "aggregate 3.29 < floor 3.50",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness"
-          ],
-          "floor": 2
+          "aggregate": 3.294,
+          "floor": 3.5
         }
       }
     ],
     "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
       {
         "action": "stage2_rewrite",
         "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
@@ -2645,153 +1333,6 @@
         "source": "web+llm",
         "retrieved": true,
         "notes": "Korean national lottery game with the same chance‑based draw",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027924",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Abilene",
-        "text": "Hey, Pedro. What's up?"
-      },
-      {
-        "index": 1,
-        "speaker": "Pedro",
-        "text": "Not much. Just working on some new invention ideas. What are you up to?"
-      },
-      {
-        "index": 2,
-        "speaker": "Abilene",
-        "text": "I'm working on a new invention too. I'm trying to create a device that would allow people to communicate with each other without speaking."
-      },
-      {
-        "index": 3,
-        "speaker": "Pedro",
-        "text": "That sounds really interesting! I'd love to hear more about it."
-      },
-      {
-        "index": 4,
-        "speaker": "Abilene",
-        "text": "Well, I'm still in the early stages of development, but I'm hoping that it will be able to send and receive messages using a form of telepathy."
-      },
-      {
-        "index": 5,
-        "speaker": "Pedro",
-        "text": "That's amazing! I can't wait to see it when it's finished."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027926",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Brittanie",
-        "text": "I'm almost done. I just have to dry the dishes and put them away."
-      },
-      {
-        "index": 1,
-        "speaker": "Mom",
-        "text": "Okay, sounds good. Let me know when you're finished so I can check everything over."
-      },
-      {
-        "index": 2,
-        "speaker": "Brittanie",
-        "text": "Will do!"
-      },
-      {
-        "index": 3,
-        "speaker": "Brittanie",
-        "text": "Hey mom, I'm finished with the dishes."
-      },
-      {
-        "index": 4,
-        "speaker": "Mom",
-        "text": "Let me take a look."
-      },
-      {
-        "index": 5,
-        "speaker": "Brittanie",
-        "text": "Okay."
-      },
-      {
-        "index": 6,
-        "speaker": "Mom",
-        "text": "Everything looks good! You did a great job."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'cultural_appropriateness', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "cultural_appropriateness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "dishwashing",
-        "ko": "설거지",
-        "type": "other",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Common term for washing dishes in Korean households",
         "validation": []
       }
     ]
@@ -2832,14 +1373,12 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
+        "stage": "stage3.phase4",
+        "rule": "intra_kr_coherence",
+        "detail": "mean adjacent-turn cosine 0.518 < floor 0.550",
         "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
+          "score": 0.5180769091707955,
+          "floor": 0.55
         }
       }
     ],
@@ -2880,15 +1419,12 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
+        "stage": "stage3.phase4",
+        "rule": "intra_kr_coherence",
+        "detail": "mean adjacent-turn cosine 0.540 < floor 0.550",
         "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
+          "score": 0.5401062143563301,
+          "floor": 0.55
         }
       }
     ],
@@ -2902,506 +1438,6 @@
       }
     ],
     "mapped_refs": []
-  },
-  {
-    "id": "soda-6027937",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Casper",
-        "text": "Why are you crying? What's wrong?"
-      },
-      {
-        "index": 1,
-        "speaker": "Erik",
-        "text": "I'm just really upset right now. I can't believe you would yell at me over something so small."
-      },
-      {
-        "index": 2,
-        "speaker": "Casper",
-        "text": "I'm sorry, I didn't mean to make you cry. I was just really angry in the moment. But I shouldn't have taken it out on you like that. Can we please talk about this calmly?"
-      },
-      {
-        "index": 3,
-        "speaker": "Erik",
-        "text": "I don't know, Casper. I just feel really hurt right now."
-      },
-      {
-        "index": 4,
-        "speaker": "Casper",
-        "text": "Erik, I'm sorry. Please, can we talk about this? I don't want to fight with you."
-      },
-      {
-        "index": 5,
-        "speaker": "Erik",
-        "text": "Okay, let's talk. But I'm still feeling really upset."
-      },
-      {
-        "index": 6,
-        "speaker": "Casper",
-        "text": "Yeah, I understand. But like I said, I'm sorry for what happened. It won't happen again, I promise."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027945",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Natanael",
-        "text": "Hey, thanks for the ride."
-      },
-      {
-        "index": 1,
-        "speaker": "Ashleigh",
-        "text": "No problem. I'm just glad I could help out."
-      },
-      {
-        "index": 2,
-        "speaker": "Natanael",
-        "text": "Yeah, I'm sure your parents would be happy to know you're helping me out."
-      },
-      {
-        "index": 3,
-        "speaker": "Ashleigh",
-        "text": "They're always happy when I help people out. It makes them feel good knowing that I'm a good person."
-      },
-      {
-        "index": 4,
-        "speaker": "Natanael",
-        "text": "That's great. My parents are always happy when I help people out too. It makes them feel like they raised me right."
-      },
-      {
-        "index": 5,
-        "speaker": "Ashleigh",
-        "text": "That's really great. I'm sure they're proud of you."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6027947",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Saphire",
-        "text": "Hey, Rose. I was thinking about changing my hair back to its original color."
-      },
-      {
-        "index": 1,
-        "speaker": "Rose",
-        "text": "Really? Why?"
-      },
-      {
-        "index": 2,
-        "speaker": "Saphire",
-        "text": "I don't know. I just feel like people are making fun of me and I don't like it."
-      },
-      {
-        "index": 3,
-        "speaker": "Rose",
-        "text": "Who's making fun of you?"
-      },
-      {
-        "index": 4,
-        "speaker": "Saphire",
-        "text": "Everyone. They say I look like a clown with this red hair."
-      },
-      {
-        "index": 5,
-        "speaker": "Rose",
-        "text": "Oh, Saphire. I think you're being too sensitive. Your hair looks fine."
-      },
-      {
-        "index": 6,
-        "speaker": "Saphire",
-        "text": "You really think so?"
-      },
-      {
-        "index": 7,
-        "speaker": "Rose",
-        "text": "Of course! You could never look like a clown, honey."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "clown",
-        "ko": "코미디언",
-        "type": "pop_culture",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean comedic performer analogous to a clown",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027958",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Usher",
-        "text": "Hi there! How are you today?"
-      },
-      {
-        "index": 1,
-        "speaker": "Customer",
-        "text": "I'm doing well, thank you. How are you?"
-      },
-      {
-        "index": 2,
-        "speaker": "Usher",
-        "text": "I'm doing great, thanks for asking. So what brings you in today?"
-      },
-      {
-        "index": 3,
-        "speaker": "Customer",
-        "text": "I need some new tires for my car."
-      },
-      {
-        "index": 4,
-        "speaker": "Usher",
-        "text": "Okay, we can definitely help you with that. What kind of car do you have?"
-      },
-      {
-        "index": 5,
-        "speaker": "Customer",
-        "text": "A Toyota Camry."
-      },
-      {
-        "index": 6,
-        "speaker": "Usher",
-        "text": "We have a few different options for tires that will fit your Camry. Let me show you what we have and then we can figure out which one is the best option for you."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'cultural_appropriateness']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "cultural_appropriateness"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "toyota camry",
-        "ko": "쏘나타",
-        "type": "brand",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Hyundai's flagship mid-size sedan, same category",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027978",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Layth",
-        "text": "I can't believe you're the best basketball player in our class."
-      },
-      {
-        "index": 1,
-        "speaker": "Caylie",
-        "text": "Yeah, I guess I am."
-      },
-      {
-        "index": 2,
-        "speaker": "Layth",
-        "text": "I've been practicing so hard to be the best, and you just beat me out of nowhere."
-      },
-      {
-        "index": 3,
-        "speaker": "Caylie",
-        "text": "Sorry, Gabi. I didn't mean to make you feel bad."
-      },
-      {
-        "index": 4,
-        "speaker": "Layth",
-        "text": "It's not your fault. I'm just really competitive and I want to be the best at everything we do."
-      },
-      {
-        "index": 5,
-        "speaker": "Caylie",
-        "text": "Well, maybe we can have a friendly competition sometime and see who comes out on top."
-      },
-      {
-        "index": 6,
-        "speaker": "Layth",
-        "text": "Yeah, that sounds like fun. Thanks, Caylie."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "basketball",
-        "ko": "농구",
-        "type": "pop_culture",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean word for basketball, the sport being referenced",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027987",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Agatha",
-        "text": "Wow, Laisha. You look absolutely stunning. I can't help but admire your beautiful body."
-      },
-      {
-        "index": 1,
-        "speaker": "Laisha",
-        "text": "Thank you, Agatha. I must say, you look pretty good yourself."
-      },
-      {
-        "index": 2,
-        "speaker": "Agatha",
-        "text": "I can't help but notice how firm and perky your breasts are. They look absolutely amazing."
-      },
-      {
-        "index": 3,
-        "speaker": "Laisha",
-        "text": "Thank you! I've been working hard to keep them looking their best."
-      },
-      {
-        "index": 4,
-        "speaker": "Agatha",
-        "text": "Your efforts have definitely paid off! Can I ask, what's your secret?"
-      },
-      {
-        "index": 5,
-        "speaker": "Laisha",
-        "text": "I honestly don't know. I just try to take care of myself as best as I can."
-      },
-      {
-        "index": 6,
-        "speaker": "Agatha",
-        "text": "Well, whatever you're doing, it's working. You have an amazing body."
-      },
-      {
-        "index": 7,
-        "speaker": "Laisha",
-        "text": "Thank you! I appreciate the compliment."
-      },
-      {
-        "index": 8,
-        "speaker": "Agatha",
-        "text": "Your skin looks so smooth and creamy. It's like porcelain."
-      },
-      {
-        "index": 9,
-        "speaker": "Laisha",
-        "text": "Thank you! I moisturize every day and night to keep it looking its best."
-      },
-      {
-        "index": 10,
-        "speaker": "Agatha",
-        "text": "It's definitely working! Your skin looks incredible."
-      },
-      {
-        "index": 11,
-        "speaker": "Laisha",
-        "text": "Thank you!"
-      },
-      {
-        "index": 12,
-        "speaker": "Agatha",
-        "text": "And your ass...I mean, wow! It's so firm and round. It looks amazing in those jeans."
-      },
-      {
-        "index": 13,
-        "speaker": "Laisha",
-        "text": "Thanks! I do a lot of squats to keep it looking its best."
-      },
-      {
-        "index": 14,
-        "speaker": "Agatha",
-        "text": "Whatever you're doing, keep doing it because it's working wonders! Your butt is absolutely gorgeous."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "porcelain",
-        "ko": "유리피부",
-        "type": "other",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean beauty term for flawless, glass‑like skin.",
-        "validation": []
-      }
-    ]
   },
   {
     "id": "soda-6027995",
@@ -3454,39 +1490,17 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'cultural_appropriateness', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "cultural_appropriateness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
+        "stage": "stage3.phase3",
+        "rule": "safety",
+        "detail": "content flagged by NeMoGuard safety check",
+        "extra": {}
       }
     ],
     "retry_actions": [
       {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
+        "action": "none",
+        "reason_summary": "safety reject — drop, do not retry",
         "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
       }
     ],
     "mapped_refs": [
@@ -3497,130 +1511,6 @@
         "source": "web+llm",
         "retrieved": true,
         "notes": "Koreans commonly use the loanword '댄스' to refer to a dance performance or routine.",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6028012",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Shan",
-        "text": "I just feel like I'm not good enough, you know? No matter what I do, it's never enough."
-      },
-      {
-        "index": 1,
-        "speaker": "Counselor",
-        "text": "It sounds like you have some pretty negative thoughts about yourself. Can you tell me more about that?"
-      },
-      {
-        "index": 2,
-        "speaker": "Shan",
-        "text": "Yeah. I guess I just feel like I'm always falling short, no matter what. Like, I'll work really hard at something and then it turns out bad or someone else does it better than me and it just feels awful."
-      },
-      {
-        "index": 3,
-        "speaker": "Counselor",
-        "text": "That doesn't sound like a very positive way to view yourself or your accomplishments. What do you think might be causing these negative thoughts?"
-      },
-      {
-        "index": 4,
-        "speaker": "Shan",
-        "text": "I don't know. Maybe it's just how things have always been for me. Whenever something goes wrong, it feels like it's all my fault somehow. And even when things are going well, I just don't feel good enough somehow."
-      },
-      {
-        "index": 5,
-        "speaker": "Counselor",
-        "text": "That doesn't sound like a very healthy way to live your life. Are you willing to try and change that?"
-      },
-      {
-        "index": 6,
-        "speaker": "Shan",
-        "text": "Yes, I think so. It's just really hard sometimes to see myself in a positive light when everything around me seems so negative. But I'm willing to try if it will help me feel better about myself."
-      },
-      {
-        "index": 7,
-        "speaker": "Counselor",
-        "text": "Well, let's start by exploring some of the reasons why you might feel this way. Do you think there are certain situations or events that trigger these negative thoughts?"
-      },
-      {
-        "index": 8,
-        "speaker": "Shan",
-        "text": "Yeah, I guess so. Like I said, whenever something goes wrong or I don't meet my own expectations, it really bothers me."
-      },
-      {
-        "index": 9,
-        "speaker": "Counselor",
-        "text": "So it sounds like you're pretty hard on yourself. Can you think of any other times when you might feel this way?"
-      },
-      {
-        "index": 10,
-        "speaker": "Shan",
-        "text": "Yeah, I guess any time I'm compared to others or have to compete with someone. It just makes me feel really inferior and not good enough."
-      },
-      {
-        "index": 11,
-        "speaker": "Counselor",
-        "text": "That definitely sounds like a lot of pressure that you're putting on yourself. Would you be willing to try and let go of some of that pressure? Maybe give yourself a break every once in awhile?"
-      },
-      {
-        "index": 12,
-        "speaker": "Shan",
-        "text": "Yeah, I think that would help. Just knowing that I don't have to be perfect all the time would take a lot of the stress off."
-      },
-      {
-        "index": 13,
-        "speaker": "Counselor",
-        "text": "That's definitely a good idea. Why don't we try some relaxation techniques to help you let go of some of that tension and stress?"
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'naturalness', 'cultural_appropriateness', 'register_consistency', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "naturalness",
-            "cultural_appropriateness",
-            "register_consistency",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "counseling",
-        "ko": "마음",
-        "type": "service",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korea's popular mental‑health counseling app",
         "validation": []
       }
     ]
@@ -3663,29 +1553,18 @@
       {
         "stage": "stage3.phase5",
         "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'cultural_appropriateness']",
+        "detail": "axes below floor 2: ['naturalness', 'register_consistency', 'persona_style_consistency']",
         "extra": {
           "axes": [
-            "property_preservation",
-            "cultural_appropriateness"
+            "naturalness",
+            "register_consistency",
+            "persona_style_consistency"
           ],
           "floor": 2
         }
       }
     ],
     "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
       {
         "action": "stage2_rewrite",
         "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
@@ -3702,174 +1581,6 @@
         "source": "web+llm",
         "retrieved": true,
         "notes": "A popular handheld rice roll often discarded half‑eaten.",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6028023",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Luna",
-        "text": "Hey Alayla, what's up?"
-      },
-      {
-        "index": 1,
-        "speaker": "Alayla",
-        "text": "Not much, what's up with you?"
-      },
-      {
-        "index": 2,
-        "speaker": "Luna",
-        "text": "I'm just feeling really frustrated with how things are going on the soccer team. I feel like I'm not being used to my full potential and it's really frustrating me."
-      },
-      {
-        "index": 3,
-        "speaker": "Alayla",
-        "text": "Yeah, I can understand that. It's tough when you feel like you're not being given a chance to show what you can do. But you have to remember that the coach is making the decisions about who plays and who doesn't based on what he thinks is best for the team. Sometimes that means leaving players on the bench who deserve to be playing. It's not personal, it's just business."
-      },
-      {
-        "index": 4,
-        "speaker": "Luna",
-        "text": "I know that, but it still doesn't make it any easier to deal with. I feel like I'm good enough to be starting every game, but instead I'm stuck riding the bench. It feels like a waste of my time and talent."
-      },
-      {
-        "index": 5,
-        "speaker": "Alayla",
-        "text": "I know how you feel, but you have to trust that the coach knows what he's doing. He's been doing this a lot longer than you have and he has the team's best interests at heart. Just keep working hard in practice and be ready to take your opportunity when it comes."
-      },
-      {
-        "index": 6,
-        "speaker": "Luna",
-        "text": "I guess you're right. Thanks for talking to me, man."
-      },
-      {
-        "index": 7,
-        "speaker": "Alayla",
-        "text": "No problem, anytime."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": []
-  },
-  {
-    "id": "soda-6028033",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Charla",
-        "text": "I'm really glad to be out of the hospital and back home. It was tough being in there, but I'm feeling a lot better now."
-      },
-      {
-        "index": 1,
-        "speaker": "Doctor",
-        "text": "I'm glad to hear that Charla. How are you doing with your medication? Are you still taking it as prescribed?"
-      },
-      {
-        "index": 2,
-        "speaker": "Charla",
-        "text": "Yes, I am. And I'm feeling a lot better because of it. My moods are more stable and I'm not having any hallucinations or anything like that anymore. So I guess the medication is working well for me."
-      },
-      {
-        "index": 3,
-        "speaker": "Doctor",
-        "text": "That's great to hear! It sounds like you're really making progress with your treatment. But we need to keep an eye on things and make sure that you continue taking your medication as prescribed and attending therapy sessions regularly. If you start to feel like your symptoms are coming back or worsening, please don't hesitate to reach out to us so we can adjust your treatment plan accordingly."
-      },
-      {
-        "index": 4,
-        "speaker": "Charla",
-        "text": "Okay, I will. Thanks for all your help, doctor."
-      },
-      {
-        "index": 5,
-        "speaker": "Doctor",
-        "text": "You're welcome, Charla. We'll be here to support you every step of the way."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation', 'cultural_appropriateness', 'persona_style_consistency']",
-        "extra": {
-          "axes": [
-            "property_preservation",
-            "cultural_appropriateness",
-            "persona_style_consistency"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "psychiatric facility",
-        "ko": "정신병원",
-        "type": "service",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Common term for a psychiatric hospital in Korean",
-        "validation": []
-      },
-      {
-        "term": "therapy",
-        "ko": "마음",
-        "type": "service",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean mental‑health counseling app used for therapy",
-        "validation": []
-      },
-      {
-        "term": "bipolar disorder",
-        "ko": "양극성 장애",
-        "type": "other",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean medical term commonly used for bipolar disorder",
         "validation": []
       }
     ]
@@ -3945,14 +1656,13 @@
     ],
     "reject_reasons": [
       {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
+        "stage": "stage3.phase2",
+        "rule": "mapped_ref_surface",
+        "detail": "1 mapped_ref.ko missing from KR text: ['유치원']",
         "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
+          "missing": [
+            "유치원"
+          ]
         }
       }
     ],
@@ -3968,13 +1678,6 @@
         "action": "websearch_cultural",
         "reason_summary": "re-resolve cultural refs from updated web context",
         "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
       }
     ],
     "mapped_refs": [
@@ -4003,169 +1706,6 @@
         "source": "web+llm",
         "retrieved": true,
         "notes": "졸업식은 졸업과 같은 학교 단계별 마일스톤을 의미하는 축하 행사다",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6028052",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Delilah",
-        "text": "Hey, coach. Great game today."
-      },
-      {
-        "index": 1,
-        "speaker": "Coach",
-        "text": "You played well out there, Delilah. You were really hustling."
-      },
-      {
-        "index": 2,
-        "speaker": "Delilah",
-        "text": "Yeah, I wanted to make sure we got the win."
-      },
-      {
-        "index": 3,
-        "speaker": "Coach",
-        "text": "That's the attitude I like to see. You're a leader out there on the court. Keep it up and you'll go far in this game."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase5",
-        "rule": "axis_floor",
-        "detail": "axes below floor 2: ['property_preservation']",
-        "extra": {
-          "axes": [
-            "property_preservation"
-          ],
-          "floor": 2
-        }
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "basketball",
-        "ko": "농구",
-        "type": "pop_culture",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean sport term for basketball",
-        "validation": []
-      }
-    ]
-  },
-  {
-    "id": "soda-6027731-dup",
-    "source_dialogue": [
-      {
-        "index": 0,
-        "speaker": "Veda",
-        "text": "Hi, Father. I'm Veda. I'm new to the area and was curious about your church. Could you tell me a little bit about it?"
-      },
-      {
-        "index": 1,
-        "speaker": "Priest",
-        "text": "Of course, Veda. Our church is based on the teachings of Jesus Christ. We believe in loving our neighbor and treating others as we would want to be treated. We strive to live according to Christ's example and teachings."
-      },
-      {
-        "index": 2,
-        "speaker": "Veda",
-        "text": "That sounds like a really great way to live. I can see why so many people are drawn to this religion. What do you think makes Christianity different from other religions?"
-      },
-      {
-        "index": 3,
-        "speaker": "Priest",
-        "text": "Well, there are a lot of different interpretations of Christianity, but for us, it's all about following Jesus Christ's example. He was a man who loved unconditionally and forgave easily. He preached compassion and understanding, even for those who disagreed with him or did not follow his teachings perfectly. We try to emulate that in our own lives.\""
-      },
-      {
-        "index": 4,
-        "speaker": "Veda",
-        "text": "That does sound different. I know that forgiveness is a big part of Christianity, but it's not always easy to do. How do you think Christians are able to forgive so easily?"
-      },
-      {
-        "index": 5,
-        "speaker": "Priest",
-        "text": "Well, I think it comes from our belief that everyone is capable of change and redemption. We believe that no one is beyond hope or help, and so we are always willing to forgive those who have wronged us. It's not always easy, but it is something we strive for."
-      }
-    ],
-    "reject_reasons": [
-      {
-        "stage": "stage3.phase1",
-        "rule": "exact_dup",
-        "detail": "NV-Embed cosine ≥ 0.99",
-        "extra": {}
-      }
-    ],
-    "retry_actions": [
-      {
-        "action": "maps_ref_redo",
-        "reason_summary": "mapped_refs failed surface/script/type/cosine gates",
-        "hints": {
-          "axis": "cultural_appropriateness"
-        }
-      },
-      {
-        "action": "websearch_cultural",
-        "reason_summary": "re-resolve cultural refs from updated web context",
-        "hints": {}
-      },
-      {
-        "action": "stage2_rewrite",
-        "reason_summary": "turn parity / register / persona style / naturalness / property_preservation below floor",
-        "hints": {
-          "axis": "register_consistency"
-        }
-      }
-    ],
-    "mapped_refs": [
-      {
-        "term": "church",
-        "ko": "교회",
-        "type": "service",
-        "source": "dict",
-        "retrieved": false,
-        "notes": "종교 예배가 열리는 공동체 공간",
-        "validation": []
-      },
-      {
-        "term": "christianity",
-        "ko": "기독교",
-        "type": "other",
-        "source": "dict",
-        "retrieved": false,
-        "notes": "major religion in Korea",
-        "validation": []
-      },
-      {
-        "term": "jesus",
-        "ko": "예수님",
-        "type": "other",
-        "source": "web+llm",
-        "retrieved": true,
-        "notes": "Korean Christians refer to Jesus as 예수님, the standard term used in religious contexts.",
         "validation": []
       }
     ]
