@@ -45,6 +45,12 @@ def main() -> int:
         help="Optionally limit the number of input rows. Currently used by stage 2.",
     )
     parser.add_argument(
+        "--pipeline-mode",
+        default="default",
+        choices=["default", "direct", "naive_persona"],
+        help="Stage 2 only: choose the stage-2 pipeline variant.",
+    )
+    parser.add_argument(
         "--resume",
         dest="resume",
         action="store_true",
@@ -81,15 +87,20 @@ def main() -> int:
         n = run(input_path, output_path, overwrite=args.overwrite)
         print(f"stage 1: wrote {n} rows → {output_path}")
     elif args.stage == 2:
+        from nemos_dream.stage2_translate_rewrite.pipeline_modes import default_stage2_output_path
         from nemos_dream.stage2_translate_rewrite.runner import run
 
+        output_path = args.output or str(
+            default_stage2_output_path("data/stage2", args.pipeline_mode)
+        )
         n = run(
             args.input,
-            args.output,
+            output_path,
+            pipeline_mode=args.pipeline_mode,
             num_records=args.num_records,
             resume=args.resume,
         )
-        print(f"stage 2: wrote {n} rows → {args.output}")
+        print(f"stage 2 ({args.pipeline_mode}): wrote {n} rows → {output_path}")
     elif args.stage == 3:
         from nemos_dream.stage3_validate.runner import run
 

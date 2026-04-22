@@ -2,14 +2,26 @@
 
 > **Owner:** Minki Hong
 
-`Stage2Output` is produced in two internal passes:
+`Stage2Output` is produced in two internal passes, with selectable pipeline
+variants:
 
 1. `run_step3.py`
-   Persona retrieval + first-pass Korean rewrite.
-   Output: `data/stage2/stage2_rewrite.jsonl`
+   First-pass Korean generation.
+   - `default`: persona retrieval + mapped-ref-aware rewrite
+   - `direct`: no persona, no mapped_refs, direct translation
+   - `naive_persona`: persona name assignment without mapped_refs
+   Output:
+   - `data/stage2/stage2_rewrite.jsonl`
+   - `data/stage2/stage2_direct.jsonl`
+   - `data/stage2/stage2_naive_persona.jsonl`
 2. `run_step4.py`
-   Naturalization / consistency polish over `step3_korean_dialogue`.
-   Output: `data/stage2/out.jsonl`
+   Finalization into `final_dialogue`.
+   - `default`: naturalization / consistency polish
+   - `direct`, `naive_persona`: copy `step3_korean_dialogue` into `final_dialogue`
+   Output:
+   - `data/stage2/out.jsonl`
+   - `data/stage2/out.direct.jsonl`
+   - `data/stage2/out.naive_persona.jsonl`
 
 The stage-level entrypoint is still `runner.py::run(input, output)`, so the
 repo-wide commands in `scripts/run_stage.py` and `scripts/run_pipeline.py`
@@ -20,6 +32,7 @@ keep working.
 | File | Role |
 |---|---|
 | `persona_downloader.py` | Download the public Google Drive persona bank into `data/persona_age_gender/` |
+| `pipeline_modes.py` | Shared mode constants + default output naming for `default` / `direct` / `naive_persona` |
 | `persona_retriever.py` | Persona selection logic adapted from the original NVIDIA step3 implementation |
 | `run_step3.py` | `Stage1Output -> Stage2Output` intermediate (`persona` + `step3_korean_dialogue`) |
 | `run_step4.py` | `stage2_rewrite.jsonl -> out.jsonl` final dialogue polish |
@@ -42,6 +55,14 @@ The final artifact populates the repo’s current v4 fields:
 `korean_dialogue` is mirrored automatically by `Stage2Output`’s validator in
 `schemas.py`, so downstream readers that still use the legacy field name keep
 working.
+
+## Pipeline Modes
+
+| Mode | Persona | mapped_refs | Step 4 |
+|---|---|---|---|
+| `default` | O | O | polish |
+| `direct` | X | X | copy step3 -> final |
+| `naive_persona` | O | X | copy step3 -> final |
 
 ## Download Persona Data
 
@@ -78,6 +99,24 @@ uv run python -m nemos_dream.stage2_translate_rewrite.run_step3 \
   --output data/stage2/stage2_rewrite.jsonl
 ```
 
+Direct-translation ablation:
+
+```bash
+uv run python -m nemos_dream.stage2_translate_rewrite.run_step3 \
+  --input data/stage1/out.jsonl \
+  --pipeline-mode direct \
+  --output data/stage2/stage2_direct.jsonl
+```
+
+Persona-only ablation:
+
+```bash
+uv run python -m nemos_dream.stage2_translate_rewrite.run_step3 \
+  --input data/stage1/out.jsonl \
+  --pipeline-mode naive_persona \
+  --output data/stage2/stage2_naive_persona.jsonl
+```
+
 ## Run Only Step 4
 
 This consumes the intermediate rewrite file and produces the final stage-2
@@ -87,6 +126,16 @@ artifact used by downstream stages.
 uv run python -m nemos_dream.stage2_translate_rewrite.run_step4 \
   --input data/stage2/stage2_rewrite.jsonl \
   --output data/stage2/out.jsonl
+```
+
+For ablation modes, `run_step4.py` keeps the same CLI but simply mirrors
+`step3_korean_dialogue` into `final_dialogue`:
+
+```bash
+uv run python -m nemos_dream.stage2_translate_rewrite.run_step4 \
+  --input data/stage2/stage2_direct.jsonl \
+  --output data/stage2/out.direct.jsonl \
+  --pipeline-mode direct
 ```
 
 ## Run Stage 2 End-To-End
@@ -109,6 +158,14 @@ uv run python scripts/run_stage.py --stage 2 \
   --no-resume
 ```
 
+Run a specific ablation mode through the repo-wide stage runner:
+
+```bash
+uv run python scripts/run_stage.py --stage 2 \
+  --input data/stage1/out.jsonl \
+  --pipeline-mode naive_persona
+```
+
 Stage-2 package directly:
 
 ```bash
@@ -123,6 +180,14 @@ For local testing against the current mock data:
 uv run python -m nemos_dream.stage2_translate_rewrite.runner \
   --input data/stage1/example_output.jsonl \
   --output data/stage2/out.jsonl
+```
+
+Choose the ablation pipeline end-to-end inside stage 2:
+
+```bash
+uv run python -m nemos_dream.stage2_translate_rewrite.runner \
+  --input data/stage1/out.jsonl \
+  --pipeline-mode direct
 ```
 
 ## Resume And Retry
@@ -172,8 +237,8 @@ uv run python -m nemos_dream.stage2_translate_rewrite.run_step4 \
 ## Notes
 
 - All default paths are repo-relative from the `nemos_dream/` root.
-- `run_step3.py` writes the required intermediate file name requested for this
-  repo: `data/stage2/stage2_rewrite.jsonl`.
-- `runner.py` always uses `stage2_rewrite.jsonl` as the internal first
-  artifact and `out.jsonl` as the final stage-2 artifact.
+- `run_step3.py` writes mode-specific intermediate names:
+  `stage2_rewrite.jsonl`, `stage2_direct.jsonl`, `stage2_naive_persona.jsonl`.
+- `runner.py` keeps the same public interface and chooses mode-specific
+  internal/final filenames when `--output` is omitted.
 - `data/persona_age_gender/` and `data/stage2/artifacts/` are ignored in git.

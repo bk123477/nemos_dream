@@ -47,11 +47,22 @@ def main() -> int:
         default=None,
         help="Optional row cap forwarded to stage 2.",
     )
+    parser.add_argument(
+        "--stage2-pipeline-mode",
+        default="default",
+        choices=["default", "direct", "naive_persona"],
+        help="Choose which stage-2 pipeline variant to run.",
+    )
     args = parser.parse_args()
 
     out = Path(args.output_dir)
     stage1_out = out / "stage1" / "stage1_output.jsonl"
-    stage2_out = out / "stage2" / "stage2_output.jsonl"
+    from nemos_dream.stage2_translate_rewrite.pipeline_modes import default_stage2_output_path
+
+    stage2_out = default_stage2_output_path(
+        out / "stage2",
+        args.stage2_pipeline_mode,
+    )
     stage3_dir = out / "stage3"
     stage4_dir = out / "reports"
 
@@ -77,10 +88,11 @@ def main() -> int:
     n2 = run_stage2(
         stage1_out,
         stage2_out,
+        pipeline_mode=args.stage2_pipeline_mode,
         num_records=args.num_records,
         resume=not args.overwrite,
     )
-    print(f"stage 2: {n2} rows → {stage2_out}")
+    print(f"stage 2 ({args.stage2_pipeline_mode}): {n2} rows → {stage2_out}")
 
     counts = run_stage3(stage2_out, stage3_dir)
     print(f"stage 3: {counts} → {stage3_dir}")

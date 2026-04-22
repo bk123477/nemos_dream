@@ -13,6 +13,13 @@ import pandas as pd
 
 from nemos_dream.io_utils import read_jsonl
 from nemos_dream.schemas import Stage2Output
+from nemos_dream.stage2_translate_rewrite.pipeline_modes import (
+    DEFAULT_PIPELINE_MODE,
+    PIPELINE_MODES,
+    default_stage2_output_path,
+    normalize_pipeline_mode,
+    requires_step4,
+)
 from nemos_dream.stage2_translate_rewrite.persona_retriever import ensure_list, format_persona_prompt_context
 from nemos_dream.stage2_translate_rewrite.run_step3 import (
     DEFAULT_ENDPOINT,
@@ -725,6 +732,29 @@ def build_final_dialogue_payload(refined_dialogue: list[dict[str, Any]]) -> list
     return final_dialogue
 
 
+def mirror_step3_to_final(row: Stage2Output, pipeline_mode: str) -> Stage2Output:
+    normalized_mode = normalize_pipeline_mode(pipeline_mode)
+    step3_dialogue = [
+        {
+            "index": turn.get("index"),
+            "speaker": clean_text(turn.get("speaker")),
+            "text": clean_text(turn.get("text")),
+        }
+        for turn in ensure_list(row.model_dump().get("step3_korean_dialogue"))
+        if turn
+    ]
+    if not step3_dialogue:
+        raise ValueError("step3_korean_dialogue is empty; cannot mirror to final_dialogue.")
+
+    payload = row.model_dump()
+    payload["final_dialogue"] = step3_dialogue
+    translation_meta = dict(payload.get("translation_meta") or {})
+    translation_meta["pipeline_mode"] = normalized_mode
+    translation_meta["step4_applied"] = False
+    payload["translation_meta"] = translation_meta
+    return Stage2Output.model_validate(payload)
+
+
 def run_single_row(
     row: Stage2Output,
     *,
@@ -734,7 +764,12 @@ def run_single_row(
     artifact_root: str | Path,
     mode: str,
     dataset_name_prefix: str,
+    pipeline_mode: str,
 ) -> Stage2Output:
+    normalized_mode = normalize_pipeline_mode(pipeline_mode)
+    if not requires_step4(normalized_mode):
+        return mirror_step3_to_final(row, normalized_mode)
+
     seed_df = build_seed_dataframe(row)
     artifact_dir = Path(artifact_root) / safe_dataset_token(row.id)
     artifact_dir.mkdir(parents=True, exist_ok=True)
@@ -767,6 +802,10 @@ def run_single_row(
     final_dialogue = build_final_dialogue_payload(refined_dialogue)
     payload = row.model_dump()
     payload["final_dialogue"] = final_dialogue
+    translation_meta = dict(payload.get("translation_meta") or {})
+    translation_meta["pipeline_mode"] = normalized_mode
+    translation_meta["step4_applied"] = True
+    payload["translation_meta"] = translation_meta
     return Stage2Output.model_validate(payload)
 
 
@@ -779,16 +818,18 @@ def run(
     model: str = DEFAULT_MODEL,
     endpoint: str = DEFAULT_ENDPOINT,
     mode: str = "create",
+    pipeline_mode: str = DEFAULT_PIPELINE_MODE,
     num_records: int | None = None,
     dataset_name: str = "stage2-step4-polish",
     retry_errors_from: str | Path | None = None,
     retry_source: str = "auto",
     resume: bool = True,
 ) -> Path:
-    api_key = load_environment(env_file)
+    normalized_mode = normalize_pipeline_mode(pipeline_mode)
+    api_key = load_environment(env_file) if requires_step4(normalized_mode) else ""
     in_retry_mode = retry_errors_from is not None
     resolved_output_path = Path(output_path) if output_path else (
-        Path(retry_errors_from) if retry_errors_from else DEFAULT_OUTPUT
+        Path(retry_errors_from) if retry_errors_from else default_stage2_output_path(REPO_ROOT / "data" / "stage2", normalized_mode)
     )
     resolved_output_path.parent.mkdir(parents=True, exist_ok=True)
     retry_errors_path = build_retry_errors_output_path(resolved_output_path)
@@ -835,6 +876,7 @@ def run(
                 artifact_root=artifact_dir,
                 mode=mode,
                 dataset_name_prefix=dataset_name,
+                pipeline_mode=normalized_mode,
             )
         except RetryableGenerationError as exc:
             error_row = row.model_dump()
@@ -877,13 +919,19 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output",
         default=None,
-        help=f"Output Stage2 JSONL path. Defaults to {DEFAULT_OUTPUT}.",
+        help="Output Stage2 JSONL path. Defaults to a mode-specific file under data/stage2/.",
     )
     parser.add_argument("--artifact-dir", default=str(DEFAULT_ARTIFACT_DIR), help="Directory for Data Designer artifacts.")
     parser.add_argument("--env-file", default=str(DEFAULT_ENV_FILE), help="Path to .env containing NVIDIA_API_KEY.")
     parser.add_argument("--model", default=DEFAULT_MODEL, help="NVIDIA model name.")
     parser.add_argument("--endpoint", default=DEFAULT_ENDPOINT, help="NVIDIA OpenAI-compatible endpoint.")
     parser.add_argument("--mode", choices=["preview", "create"], default="create", help="Use Data Designer preview or create mode.")
+    parser.add_argument(
+        "--pipeline-mode",
+        choices=PIPELINE_MODES,
+        default=DEFAULT_PIPELINE_MODE,
+        help="Stage-2 finalization variant: default | direct | naive_persona.",
+    )
     parser.add_argument("--num-records", type=int, default=None, help="Optionally limit the number of input rows.")
     parser.add_argument("--dataset-name", default="stage2-step4-polish", help="Dataset name prefix for Data Designer artifacts.")
     parser.add_argument(
@@ -906,14 +954,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main() -> None:
     parser = build_arg_parser()
     args = parser.parse_args()
+    resolved_output = args.output or str(
+        default_stage2_output_path(REPO_ROOT / "data" / "stage2", args.pipeline_mode)
+    )
     output_path = run(
         input_path=args.input,
-        output_path=args.output,
+        output_path=resolved_output,
         artifact_dir=args.artifact_dir,
         env_file=args.env_file,
         model=args.model,
         endpoint=args.endpoint,
         mode=args.mode,
+        pipeline_mode=args.pipeline_mode,
         num_records=args.num_records,
         dataset_name=args.dataset_name,
         retry_errors_from=args.retry_errors_from,

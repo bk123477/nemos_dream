@@ -29,6 +29,11 @@ layered JSONL artifacts under `data/stage{N}/`.
 
 Stage 2 also depends on a local persona bank under `data/persona_age_gender/`,
 which is created by `uv run python -m nemos_dream.stage2_translate_rewrite.persona_downloader`.
+Stage 2 supports three pipeline variants:
+
+- `default`: persona + mapped_refs + step4 polish
+- `direct`: no persona, no mapped_refs, direct EN→KO translation ablation
+- `naive_persona`: persona-based speaker renaming without mapped_refs ablation
 
 **Stage owners start here:** `.claude/docs/stage-owner-guide.md` — one-page
 playbook per stage. For deeper reference: `.claude/docs/architecture.md`
@@ -63,6 +68,11 @@ uv run python scripts/run_stage.py --stage 1 \
 
 # 6. End-to-end run
 uv run python scripts/run_pipeline.py --input data/raw/sample_input.jsonl
+
+# Optional: choose a stage-2 ablation pipeline
+uv run python scripts/run_pipeline.py \
+    --input data/raw/sample_input.jsonl \
+    --stage2-pipeline-mode direct
 ```
 
 ## NVIDIA stack at a glance

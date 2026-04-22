@@ -17,6 +17,15 @@ from pydantic import BaseModel, Field
 
 from nemos_dream.io_utils import read_jsonl
 from nemos_dream.schemas import Stage1Output, Stage2Output
+from nemos_dream.stage2_translate_rewrite.pipeline_modes import (
+    DEFAULT_PIPELINE_MODE,
+    DIRECT_PIPELINE_MODE,
+    NAIVE_PERSONA_PIPELINE_MODE,
+    PIPELINE_MODES,
+    default_step3_output_path,
+    normalize_pipeline_mode,
+    uses_persona,
+)
 from nemos_dream.stage2_translate_rewrite.persona_retriever import (
     PersonaRetriever,
     ensure_list,
@@ -401,37 +410,92 @@ def build_model_configs(model_name: str) -> list[dd.ModelConfig]:
     ]
 
 
-def build_config_builder(
-    seed_df: pd.DataFrame,
-    model_name: str,
-    persona_dir: str | Path,
-    base_seed: int,
-) -> dd.DataDesignerConfigBuilder:
-    builder = dd.DataDesignerConfigBuilder(model_configs=build_model_configs(model_name))
-    builder.with_seed_dataset(dd.DataFrameSeedSource(df=seed_df))
-    builder.add_column(
-        dd.CustomColumnConfig(
-            name="persona",
-            generator_function=retrieve_persona_column,
-            generator_params=PersonaRetrievalParams(
-                persona_dir=str(persona_dir),
-                base_seed=base_seed,
-            ),
+def build_step3_system_prompt(pipeline_mode: str) -> str:
+    normalized_mode = normalize_pipeline_mode(pipeline_mode)
+    if normalized_mode == DIRECT_PIPELINE_MODE:
+        return (
+            "당신은 영어 멀티턴 대화를 한국어로 직역에 가깝게 번역하는 전문가입니다. "
+            "문화적 재해석, 페르소나 적용, 과한 현지화 없이 원문의 의미와 턴 구조를 최대한 직접적으로 옮기세요. "
+            "모든 text는 한국어여야 하며, 각 source turn에 정확히 하나의 한국어 turn을 대응시켜야 합니다. "
+            "반드시 구조화된 결과만 반환하세요."
         )
+    if normalized_mode == NAIVE_PERSONA_PIPELINE_MODE:
+        return (
+            "당신은 영어 대화를 한국어 대화 데이터셋으로 변환하는 전문가입니다. "
+            "선택된 한국 persona는 speaker 이름을 한국어 이름으로 바꾸는 데 우선 사용하되, "
+            "mapped_refs 같은 추가 문화 치환 없이 장면에 맞는 자연스러운 한국어 대화를 작성하세요. "
+            "모든 text는 한국어여야 하며, 각 source turn에 정확히 하나의 한국어 turn을 대응시켜야 합니다. "
+            "반드시 구조화된 결과만 반환하세요."
+        )
+    return (
+        "당신은 영어 대화를 한국어 대화 데이터셋으로 현지화하는 전문가입니다. "
+        "직역을 피하고, 한국 화자가 실제로 말할 법한 자연스러운 대화로 다시 쓰세요. "
+        "출력의 모든 text는 완전한 한국어 문장이어야 하며, 영어, 일본어, 중국어, 스페인어, 프랑스어 등 "
+        "한국어가 아닌 표현을 섞지 마세요. "
+        "각 source turn에 정확히 하나의 한국어 turn을 대응시키고, 턴을 합치거나 생략하지 마세요. "
+        "반드시 구조화된 출력만 반환하세요."
     )
-    builder.add_column(
-        dd.LLMStructuredColumnConfig(
-            name="step3_korean_dialogue",
-            model_alias="step3-dialogue-writer",
-            system_prompt=(
-                "당신은 영어 대화를 한국어 대화 데이터셋으로 현지화하는 전문가입니다. "
-                "직역을 피하고, 한국 화자가 실제로 말할 법한 자연스러운 대화로 다시 쓰세요. "
-                "출력의 모든 text는 완전한 한국어 문장이어야 하며, 영어, 일본어, 중국어, 스페인어, 프랑스어 등 "
-                "한국어가 아닌 표현을 섞지 마세요. "
-                "각 source turn에 정확히 하나의 한국어 turn을 대응시키고, 턴을 합치거나 생략하지 마세요. "
-                "반드시 구조화된 출력만 반환하세요."
-            ),
-            prompt="""\
+
+
+def build_step3_user_prompt(pipeline_mode: str) -> str:
+    normalized_mode = normalize_pipeline_mode(pipeline_mode)
+    if normalized_mode == DIRECT_PIPELINE_MODE:
+        return """\
+영어 대화를 한국어로 직역에 가깝게 번역하세요.
+
+[source_dialogue]
+{{ source_dialogue_prompt_context }}
+
+[scene]
+{{ scene_prompt_context }}
+
+[source speaker hints]
+{{ speaker_prompt_context }}
+
+[출력해야 하는 turn 수]
+정확히 {{ source_turn_count }}개 turn을 출력하세요.
+
+[반드시 지킬 규칙]
+1. source_dialogue의 턴 개수와 순서를 유지하세요.
+2. 각 turn은 index, speaker, text를 모두 포함해야 합니다.
+3. index는 source_dialogue와 같게 유지하고, speaker는 source_dialogue의 영어 speaker 이름을 그대로 유지하세요.
+4. text는 원문의 의미를 한국어로 직접 번역하세요. 과한 의역, 문화 치환, 배경 추가, 말투 재설계는 하지 마세요.
+5. mapped_refs, persona, 한국식 문화 대체를 적용하지 마세요. 원문에 나온 브랜드, 장소, 문화 요소는 가능한 한 그대로 번역하거나 음차 수준으로만 처리하세요.
+6. 텍스트는 모두 한국어여야 하되, speaker 이름은 영어 그대로 유지하세요.
+7. turn을 요약하거나 합치지 말고 1:1 대응을 유지하세요.
+8. 설명문, 주석, 마크다운 코드블록 없이 오직 구조화된 결과만 반환하세요.
+"""
+    if normalized_mode == NAIVE_PERSONA_PIPELINE_MODE:
+        return """\
+영어 대화를 한국어 대화 데이터셋으로 변환하세요.
+
+[source_dialogue]
+{{ source_dialogue_prompt_context }}
+
+[scene]
+{{ scene_prompt_context }}
+
+[source speaker hints]
+{{ speaker_prompt_context }}
+
+[selected korean personas]
+{{ persona_prompt_context }}
+
+[출력해야 하는 turn 수]
+정확히 {{ source_turn_count }}개 turn을 출력하세요.
+
+[반드시 지킬 규칙]
+1. source_dialogue의 턴 개수와 순서를 유지하세요.
+2. 각 turn은 index, speaker, text를 모두 포함해야 합니다.
+3. index는 source_dialogue와 같게 유지하고, speaker는 선택된 한국 persona 이름으로 작성하세요.
+4. persona는 speaker 이름을 한국어로 바꾸는 데 우선 사용하세요. persona의 세부 배경을 새 설정처럼 덧붙이거나 대화 내용을 크게 바꾸지 마세요.
+5. mapped_refs나 별도의 문화 치환 규칙은 사용하지 말고, 장면과 대화 맥락을 보고 한국어로 자연스럽게 번역하세요.
+6. text는 모두 자연스러운 한국어여야 하며, 비한국어 표현을 남기지 마세요.
+7. speaker의 이름 변환 외에는 불필요한 현지화, 배경 추가, persona 기반 세계관 확장은 하지 마세요.
+8. turn을 요약하거나 합치지 말고 1:1 대응을 유지하세요.
+9. 설명문, 주석, 마크다운 코드블록 없이 오직 구조화된 결과만 반환하세요.
+"""
+    return """\
 영어 대화를 한국어 대화 데이터셋으로 변환하세요.
 
 [source_dialogue]
@@ -475,7 +539,36 @@ def build_config_builder(
 13. turn을 요약하거나 합치지 말고, source_dialogue의 각 turn에 대해 1:1로 대응되는 한국어 turn을 작성하세요.
 14. 마지막으로 출력하기 전에 turn 개수가 정확히 {{ source_turn_count }}개인지 스스로 확인하세요.
 15. 설명문, 주석, 마크다운 코드블록 없이 오직 구조화된 결과만 반환하세요.
-""",
+"""
+
+
+def build_config_builder(
+    seed_df: pd.DataFrame,
+    model_name: str,
+    persona_dir: str | Path,
+    base_seed: int,
+    pipeline_mode: str,
+) -> dd.DataDesignerConfigBuilder:
+    normalized_mode = normalize_pipeline_mode(pipeline_mode)
+    builder = dd.DataDesignerConfigBuilder(model_configs=build_model_configs(model_name))
+    builder.with_seed_dataset(dd.DataFrameSeedSource(df=seed_df))
+    if uses_persona(normalized_mode):
+        builder.add_column(
+            dd.CustomColumnConfig(
+                name="persona",
+                generator_function=retrieve_persona_column,
+                generator_params=PersonaRetrievalParams(
+                    persona_dir=str(persona_dir),
+                    base_seed=base_seed,
+                ),
+            )
+        )
+    builder.add_column(
+        dd.LLMStructuredColumnConfig(
+            name="step3_korean_dialogue",
+            model_alias="step3-dialogue-writer",
+            system_prompt=build_step3_system_prompt(normalized_mode),
+            prompt=build_step3_user_prompt(normalized_mode),
             output_format=KoreanDialoguePayload,
         )
     )
@@ -492,6 +585,7 @@ def run_data_designer(
     mode: str,
     base_seed: int,
     dataset_name: str,
+    pipeline_mode: str,
 ) -> pd.DataFrame:
     data_designer = DataDesigner(
         model_providers=[build_provider(api_key=api_key, endpoint=endpoint)],
@@ -502,6 +596,7 @@ def run_data_designer(
         model_name=model_name,
         persona_dir=persona_dir,
         base_seed=base_seed,
+        pipeline_mode=pipeline_mode,
     )
     data_designer.validate(builder)
     if mode == "preview":
@@ -606,7 +701,9 @@ def run_single_row(
     mode: str,
     base_seed: int,
     dataset_name_prefix: str,
+    pipeline_mode: str,
 ) -> Stage2Output:
+    normalized_mode = normalize_pipeline_mode(pipeline_mode)
     seed_df = build_seed_dataframe(row)
     artifact_dir = Path(artifact_root) / safe_dataset_token(row.id)
     artifact_dir.mkdir(parents=True, exist_ok=True)
@@ -625,6 +722,7 @@ def run_single_row(
             mode=mode,
             base_seed=base_seed,
             dataset_name=dataset_name,
+            pipeline_mode=normalized_mode,
         )
     except Exception as exc:
         raise RetryableGenerationError(str(exc)) from exc
@@ -642,6 +740,13 @@ def run_single_row(
     stage2_payload = row.model_dump()
     stage2_payload["persona"] = personas
     stage2_payload["step3_korean_dialogue"] = korean_dialogue
+    translation_meta = dict(stage2_payload.get("translation_meta") or {})
+    translation_meta["pipeline_mode"] = normalized_mode
+    translation_meta["step3_pipeline"] = normalized_mode
+    translation_meta["step4_applied"] = normalized_mode == DEFAULT_PIPELINE_MODE
+    stage2_payload["translation_meta"] = translation_meta
+    if normalized_mode != DEFAULT_PIPELINE_MODE:
+        stage2_payload["final_dialogue"] = korean_dialogue
     return Stage2Output.model_validate(stage2_payload)
 
 
@@ -656,13 +761,15 @@ def run(
     endpoint: str = DEFAULT_ENDPOINT,
     seed: int = DEFAULT_SEED,
     mode: str = "create",
+    pipeline_mode: str = DEFAULT_PIPELINE_MODE,
     num_records: int | None = None,
     dataset_name: str = "stage2-step3-rewrite",
     retry_errors_from: str | Path | None = None,
     retry_source: str = "auto",
     resume: bool = True,
 ) -> Path:
-    if not Path(persona_dir).exists():
+    normalized_mode = normalize_pipeline_mode(pipeline_mode)
+    if uses_persona(normalized_mode) and not Path(persona_dir).exists():
         raise FileNotFoundError(
             f"Persona directory not found: {persona_dir}. "
             "Run `python -m nemos_dream.stage2_translate_rewrite.persona_downloader` first."
@@ -671,7 +778,7 @@ def run(
     api_key = load_environment(env_file)
     in_retry_mode = retry_errors_from is not None
     resolved_output_path = Path(output_path) if output_path else (
-        Path(retry_errors_from) if retry_errors_from else DEFAULT_OUTPUT
+        Path(retry_errors_from) if retry_errors_from else default_step3_output_path(REPO_ROOT / "data" / "stage2", normalized_mode)
     )
     resolved_output_path.parent.mkdir(parents=True, exist_ok=True)
     retry_errors_path = build_retry_errors_output_path(resolved_output_path)
@@ -720,6 +827,7 @@ def run(
                 mode=mode,
                 base_seed=seed,
                 dataset_name_prefix=dataset_name,
+                pipeline_mode=normalized_mode,
             )
         except RetryableGenerationError as exc:
             error_row = row.model_dump()
@@ -762,7 +870,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output",
         default=None,
-        help=f"Output JSONL path. Defaults to {DEFAULT_OUTPUT}.",
+        help="Output JSONL path. Defaults to a mode-specific file under data/stage2/.",
     )
     parser.add_argument("--artifact-dir", default=str(DEFAULT_ARTIFACT_DIR), help="Directory for Data Designer artifacts.")
     parser.add_argument("--env-file", default=str(DEFAULT_ENV_FILE), help="Path to .env containing NVIDIA_API_KEY.")
@@ -771,6 +879,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument("--endpoint", default=DEFAULT_ENDPOINT, help="NVIDIA OpenAI-compatible endpoint.")
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED, help="Base seed for persona sampling.")
     parser.add_argument("--mode", choices=["preview", "create"], default="create", help="Use Data Designer preview or create mode.")
+    parser.add_argument(
+        "--pipeline-mode",
+        choices=PIPELINE_MODES,
+        default=DEFAULT_PIPELINE_MODE,
+        help="Stage-2 step3 variant: default | direct | naive_persona.",
+    )
     parser.add_argument("--num-records", type=int, default=None, help="Optionally limit the number of input rows.")
     parser.add_argument("--dataset-name", default="stage2-step3-rewrite", help="Dataset name prefix for Data Designer artifacts.")
     parser.add_argument(
@@ -793,9 +907,12 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main() -> None:
     parser = build_arg_parser()
     args = parser.parse_args()
+    resolved_output = args.output or str(
+        default_step3_output_path(REPO_ROOT / "data" / "stage2", args.pipeline_mode)
+    )
     output_path = run(
         input_path=args.input,
-        output_path=args.output,
+        output_path=resolved_output,
         artifact_dir=args.artifact_dir,
         env_file=args.env_file,
         persona_dir=args.persona_dir,
@@ -803,6 +920,7 @@ def main() -> None:
         endpoint=args.endpoint,
         seed=args.seed,
         mode=args.mode,
+        pipeline_mode=args.pipeline_mode,
         num_records=args.num_records,
         dataset_name=args.dataset_name,
         retry_errors_from=args.retry_errors_from,

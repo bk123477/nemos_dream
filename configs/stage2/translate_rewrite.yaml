@@ -21,6 +21,7 @@ model:
 run:
   seed: 7
   mode: create
+  pipeline_mode: default
 
 targets:
   platforms: [twitter, instagram, reddit, tiktok, thread]
