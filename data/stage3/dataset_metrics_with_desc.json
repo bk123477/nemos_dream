@@ -1,17 +1,17 @@
 {
   "counts": {
     "accepted": 24,
-    "rejected": 23,
+    "rejected": 23, // threshold score로 reject된 갯수
     "total": 47
   },
   "reward_distribution": {
-    "coherence": {
+    "coherence": { // 각 턴의 대화가 자연스럽게 이어지는 정도
       "mean": 4.7083,
       "p50": 5.0,
       "p95": 5.0,
       "n": 24
     },
-    "correctness": {
+    "correctness": { // 번역/문화 매핑의 정확성
       "mean": 4.0,
       "p50": 4.0,
       "p95": 5.0,
@@ -19,32 +19,32 @@
     }
   },
   "embedding_diversity": {
-    "mean_pairwise_distance": 0.6747,
+    "mean_pairwise_distance": 0.6747, // 모든 쌍의 cosine distance (0 다양성 낮음)
     "source": "nv_embed"
   },
-  "distinct_n": {
-    "1": 0.3039,
-    "2": 0.7954,
-    "3": 0.9525
+  "distinct_n": { // 유일한 n-gram 개수 / 전체 n-gram 개수
+    "1": 0.3039, // unigram 전체 단어 중 30%가 고유. 70%는 중복 — 자연스러움 (기능어·조사 반복)
+    "2": 0.7954, // bigram 구 단위는 거의 겹치지 않음
+    "3": 0.9525 // trigram 3단어 연속은 사실상 다 다름. 문장 레벨에서 템플릿 복붙 없음 확
   },
-  "decomposed_coverage_entropy": {
-    "overall_register": 0.6584,
-    "overall_emotion": 1.8879,
-    "speech_acts": 2.3096,
+  "decomposed_coverage_entropy": { // 카테고리 커버리지 엔트로피 (shannon) 각 카테고리의 비율을 구해 비율에 log sum
+    "overall_register": 0.6584, // 쏠림
+    "overall_emotion": 1.8879, 
+    "speech_acts": 2.3096,// 골고루나옴
     "scene_setting": 2.3512,
     "relationship_type": 1.9288,
     "speaker_age_group": 1.8232,
     "speaker_register": 0.6584
   },
   "cultural_ref_diversity": {
-    "total_refs": 13,
-    "distinct_terms": 12,
-    "diversity_ratio": 0.9231,
-    "type_entropy": 2.1997
+    "total_refs": 13, // cultural_refs로 추출된 항목 총 개수 
+    "distinct_terms": 12, // 유일한 term 개수 (13개 중 12개 유일 = 1개만 중복) 
+    "diversity_ratio": 0.9231, // distinct / total = 0.92 → 거의 매번 새로운 문화 참조
+    "type_entropy": 2.1997 // type 필드의 Shannon 엔트로피
   },
   "mapped_ref_stats": {
-    "total_mapped": 13,
-    "distinct_ko": 12,
+    "total_mapped": 13, // accepted에 붙은 mapped_refs 총 개수
+    "distinct_ko": 12, // 유일한 한국어 매핑 표현 수
     "retrieved_share": 1.0,
     "by_source": {
       "web+llm": 13

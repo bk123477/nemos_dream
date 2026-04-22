@@ -82,8 +82,8 @@ async def apply_async(
 ) -> None:
     """Async phase-3 mutator.
 
-    ``safety_fn`` is awaited per row; ``pii_fn`` is sync (Curator's
-    ``PiiModifier`` is not awaitable). Both populate
+    ``safety_fn`` is awaited per row; ``pii_fn`` is sync (Presidio's
+    ``AnalyzerEngine.analyze`` is not awaitable). Both populate
     ``quality.safety_pass`` / ``quality.pii_pass`` regardless of whether
     the row was already rejected upstream, so stage 4 can report
     guardrail pass-rates on the full population.
@@ -118,7 +118,7 @@ async def apply_async(
                 RejectReason(
                     stage="stage3.phase3",
                     rule="pii",
-                    detail="PII entity detected by Curator PiiModifier",
+                    detail="PII entity detected by Presidio AnalyzerEngine",
                 )
             )
             row.valid = False
